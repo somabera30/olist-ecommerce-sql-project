@@ -1,0 +1,471 @@
+# Olist E-commerce SQL Project
+## Learning Log
+
+This document records the key concepts learned throughout the project. It focuses on understanding rather than documenting every action performed.
+
+---
+
+# Day 1 - Project Setup & Understanding Relational Databases
+
+## Objectives
+
+- Set up the project environment.
+- Learn Git fundamentals.
+- Understand why relational databases use multiple tables.
+
+---
+
+## Concepts Learned
+
+### Project Setup
+
+Configured the development environment using:
+
+- Visual Studio Code
+- PostgreSQL
+- pgAdmin 4
+- Git
+
+Created the initial project structure for SQL scripts, datasets, and documentation.
+
+---
+
+### Git Fundamentals
+
+Learned how Git tracks project history.
+
+Commands learned:
+
+```bash
+git init
+git status
+git add .
+git commit -m "message"
+```
+
+Understood that:
+
+- Git tracks changes to files.
+- A commit represents a meaningful checkpoint in the project.
+- Commits should describe *what changed*, not *when it changed*.
+
+---
+
+### Purpose of README.md
+
+Learned that README.md acts as the project's introduction.
+
+It should explain:
+
+- Project purpose
+- Dataset
+- Tools used
+- Folder structure
+- How to reproduce the project
+
+---
+
+### Purpose of .gitignore
+
+Learned why some files should never be tracked by Git.
+
+Examples include:
+
+- temporary files
+- editor settings
+- cache files
+
+This keeps the repository clean.
+
+---
+
+### Relational Database Thinking
+
+Instead of storing everything in one huge spreadsheet, databases separate information into multiple related tables.
+
+Example:
+
+Customers
+
+Orders
+
+Products
+
+Sellers
+
+Reasons:
+
+- Reduce data duplication
+- Maintain data integrity
+- Easier updates
+- Better scalability
+- Easier querying
+
+---
+
+## Key Takeaways
+
+- Git records project history.
+- Every commit should represent meaningful progress.
+- Databases are designed around business entities rather than spreadsheets.
+
+---
+
+## Insights & Reflections
+
+The first important mindset shift:
+
+Rather than asking
+
+"What command should I run?"
+
+begin asking
+
+"Why is the database designed this way?"
+
+---
+
+## End of Day
+
+✔ Git repository initialized
+
+✔ Project structure created
+
+✔ Development environment ready
+
+---
+
+# Day 2 - Database Design & Relationships
+
+## Objectives
+
+- Understand relational database design.
+- Learn Primary Keys.
+- Learn Foreign Keys.
+- Begin designing the database schema.
+
+---
+
+## Concepts Learned
+
+### Thinking Before Writing SQL
+
+Before selecting a data type or constraint, first ask:
+
+> What does this data represent?
+
+This became the guiding question for database design.
+
+---
+
+### Primary Keys
+
+A Primary Key:
+
+- uniquely identifies every record
+- cannot contain NULL values
+- should remain stable
+
+Examples:
+
+- customer_id
+- order_id
+
+---
+
+### Foreign Keys
+
+A Foreign Key creates relationships between tables.
+
+It ensures that child records always reference an existing parent record.
+
+Example:
+
+orders.customer_id
+
+references
+
+customers.customer_id
+
+This prevents orphan records.
+
+---
+
+### Parent and Child Tables
+
+Learned that parent tables must exist before child tables.
+
+Example:
+
+Customers
+
+↓
+
+Orders
+
+because one customer may place many orders.
+
+---
+
+### Choosing Data Types
+
+Instead of memorizing SQL types, choose them according to business meaning.
+
+Examples:
+
+customer_id → TEXT
+
+order_purchase_timestamp → TIMESTAMP
+
+customer_state → CHAR(2)
+
+order_status → VARCHAR(20)
+
+---
+
+### NULL Values
+
+Instead of asking
+
+"Should this column allow NULL?"
+
+ask
+
+"Can this event fail to happen?"
+
+Examples:
+
+Purchase timestamp
+
+→ Always exists
+
+Delivery timestamp
+
+→ May never happen
+
+Approval timestamp
+
+→ May never happen
+
+---
+
+### Entity Relationship Diagram (ERD)
+
+Created the first ERD connecting:
+
+Customers
+
+Orders
+
+Order Items
+
+Products
+
+Sellers
+
+Payments
+
+Reviews
+
+Geolocation
+
+Category Translation
+
+Learned that some relationships exist logically even if they are not enforced by Foreign Keys.
+
+---
+
+## Key Takeaways
+
+- Database design begins with understanding the business.
+- Relationships are more important than individual tables.
+- Primary Keys identify.
+- Foreign Keys connect.
+- Parent tables must be created before child tables.
+
+---
+
+## Insights & Reflections
+
+A major realization:
+
+SQL is only one part of database design.
+
+Understanding business relationships is what determines how the database should be built.
+
+---
+
+## End of Day
+
+✔ ERD completed
+
+✔ Customers table designed
+
+✔ Orders table designed
+
+✔ Foreign Key concept understood
+
+---
+
+# Day 3 - Creating the Schema & Thinking Like a Data Professional
+
+## Objectives
+
+- Create the first relational tables.
+- Understand database dependencies.
+- Learn how data should be imported into PostgreSQL.
+- Begin thinking like a data analyst rather than simply writing SQL.
+
+---
+
+## Concepts Learned
+
+### Building the First Schema
+
+Successfully created:
+
+- customers
+- orders
+
+using PostgreSQL.
+
+Understood why the Customers table must be created before Orders.
+
+---
+
+### Business Perspective of Foreign Keys
+
+A Foreign Key exists because an order cannot belong to a customer who does not exist.
+
+Instead of remembering SQL syntax, learned to think:
+
+> Can this record exist without its parent?
+
+If not,
+
+a Foreign Key is required.
+
+---
+
+### Import Order Depends on Relationships
+
+Learned that data should be imported according to table dependencies.
+
+General rule:
+
+Parent tables first
+
+↓
+
+Child tables later
+
+instead of importing files randomly.
+
+---
+
+### Why PostgreSQL Uses COPY
+
+Initially assumed CSV files would be inserted using INSERT.
+
+Learned that PostgreSQL uses COPY because it is optimized for importing large datasets efficiently.
+
+---
+
+### Understanding CSV Import
+
+Learned that PostgreSQL imports data by column position.
+
+It does not automatically understand CSV headers.
+
+HEADER TRUE tells PostgreSQL that the first row contains column names rather than actual data.
+
+---
+
+### Git Protects Data
+
+Opened a CSV in Excel.
+
+Git immediately detected unexpected modifications.
+
+Learned how to use:
+
+git diff
+
+git restore
+
+to inspect and discard unintended changes.
+
+Also learned why Excel is generally avoided for Git-tracked datasets.
+
+---
+
+### ZIP Codes Are Identifiers
+
+Originally considered storing ZIP codes as integers.
+
+Realized they are identifiers rather than numeric values.
+
+Leading zeros should be preserved.
+
+This reinforced the principle:
+
+Identifiers are often better stored as text.
+
+---
+
+### Data Profiling Before Import
+
+Initially planned to import CSV files immediately.
+
+Realized that professional projects first profile raw data.
+
+Questions to answer before importing include:
+
+- Row count
+- Missing values
+- Duplicate primary keys
+- Invalid values
+- Business rule violations
+
+Only after understanding the source data should it be loaded into PostgreSQL.
+
+---
+
+## Key Takeaways
+
+- Parent tables are created before child tables.
+- Parent data is imported before child data.
+- COPY is used for bulk loading.
+- Git can protect datasets from accidental modification.
+- Data profiling should happen before importing data.
+
+---
+
+## Insights & Reflections
+
+The biggest mindset shift so far:
+
+Instead of asking
+
+"How do I import the CSV?"
+
+began asking
+
+"Shouldn't we validate the data before importing?"
+
+This reflects a transition from learning SQL syntax to understanding professional data workflows.
+
+---
+
+## End of Day
+
+✔ Customers table created
+
+✔ Orders table created
+
+✔ First Foreign Key implemented
+
+✔ Import workflow understood
+
+✔ Professional project workflow redefined
+
