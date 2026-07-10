@@ -1,95 +1,55 @@
-# Olist E-commerce SQL Project
-## Roadmap
+# Olist SQL Project Roadmap
 
-This document tracks project progress and upcoming milestones.
+## Phase 1 — Project Setup ✅
 
----
-
-# Completed
-
-## Project Setup
-
-- [x] Install PostgreSQL
-- [x] Install pgAdmin
-- [x] Install VS Code
-- [x] Install Git
-- [x] Initialize Git repository
-- [x] Create project structure
+- [x] Git repository initialized
+- [x] README created
+- [x] Project folder structure
+- [x] PostgreSQL database created
+- [x] VS Code connected to PostgreSQL
 
 ---
 
-## Database Design
+## Phase 2 — Database Design ✅
 
-- [x] Understand relational databases
-- [x] Create ERD
-- [x] Understand Primary Keys
-- [x] Understand Foreign Keys
-- [x] Design customers table
-- [x] Design orders table
-
----
-
-## Database Implementation
-
-- [x] Create database
-- [x] Create customers table
-- [x] Create orders table
+- [x] Understand dataset
+- [x] Study table relationships
+- [x] Draw rough ERD
+- [x] Design Customers table
+- [x] Design Orders table
 
 ---
 
-# Current Focus
+## Phase 3 — Import Data 🚧
 
-## Data Profiling
-
-Before importing data, profile the raw CSV files.
-
-Tasks:
-
-- [ ] Count rows
-- [ ] Check missing values
-- [ ] Check duplicate primary keys
-- [ ] Verify data types
-- [ ] Look for invalid values
-- [ ] Check business rule consistency
-
----
-
-# Upcoming
-
-## Data Import
-
-- [ ] Import customers
-- [ ] Validate import
+- [x] Create tables
+- [x] Import customers.csv
 - [ ] Import remaining tables
 
 ---
 
-## SQL Analysis
+## Phase 4 — Data Profiling 🚧
 
-- [ ] Exploratory queries
-- [ ] JOINs
-- [ ] Aggregations
-- [ ] Window Functions
-- [ ] Common Table Expressions (CTEs)
+### Customers Table
 
----
-
-## Business Analysis
-
-Answer business questions such as:
-
-- Revenue Analysis
-- Customer Behaviour
-- Seller Performance
-- Delivery Performance
-- Payment Analysis
-- Review Analysis
+- [x] Verify row count
+- [x] Verify NULL values
+- [x] Verify duplicate customer_id
+- [x] Verify duplicate customer_unique_id
+- [x] Write ZIP code validation queries
+- [ ] Interpret ZIP validation results
+- [ ] Validate customer_state
+- [ ] Validate customer_city
+- [ ] Validate ID patterns
 
 ---
 
-## Portfolio Completion
+## Phase 5 — Business Analysis
 
-- [ ] Final README
-- [ ] Final ERD
-- [ ] SQL documentation
-- [ ] GitHub-ready repository
+Not started
+
+---
+
+## Phase 6 — Dashboard & Documentation
+
+Not started

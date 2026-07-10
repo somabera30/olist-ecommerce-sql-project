@@ -469,3 +469,38 @@ This reflects a transition from learning SQL syntax to understanding professiona
 
 ✔ Professional project workflow redefined
 
+---
+
+## Day 4 (2026-07-10)
+
+### Objective
+
+Begin profiling the `customers` table after importing the data into PostgreSQL.
+
+### What I learned
+
+- Data profiling should be performed before business analysis.
+- `COUNT(*)` counts all rows, whereas `COUNT(column)` counts only non-NULL values.
+- `customer_id` is unique because it is the Primary Key.
+- `customer_unique_id` is a business identifier and can map to multiple `customer_id`s.
+- `HAVING` filters grouped results after `GROUP BY`.
+- PostgreSQL uses `LENGTH()` to count characters (`LEN()` is used in SQL Server).
+- ZIP codes are stored as `VARCHAR(5)` to preserve leading zeros.
+- Profiling queries should answer a business validation question, not just return data.
+
+### Work completed
+
+- Connected VS Code to PostgreSQL.
+- Profiled row count.
+- Checked missing values.
+- Validated duplicate `customer_id`.
+- Validated duplicate `customer_unique_id`.
+- Wrote ZIP code validation queries.
+
+### Next session
+
+- Interpret ZIP code validation results.
+- Validate `customer_state`.
+- Validate `customer_city`.
+- Validate ID formats.
+- Complete profiling of the `customers` table.

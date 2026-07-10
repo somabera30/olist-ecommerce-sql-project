@@ -127,3 +127,22 @@ Reason
 An order cannot exist without an existing customer.
 
 This protects referential integrity and prevents orphan records.
+
+---
+
+## Day 4 (2026-07-10)
+
+### Decisions
+
+- Perform data profiling before starting business analysis.
+- Follow a consistent profiling workflow:
+  1. Row count
+  2. Missing values
+  3. Duplicate checks
+  4. Data format validation
+  5. Business rule validation
+- Organize every profiling query with:
+  - Check number
+  - Purpose
+  - SQL query
+- Write an interpretation after important profiling results instead of only recording the SQL output.
