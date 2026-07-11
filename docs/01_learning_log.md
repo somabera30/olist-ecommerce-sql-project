@@ -471,13 +471,13 @@ This reflects a transition from learning SQL syntax to understanding professiona
 
 ---
 
-## Day 4 (2026-07-10)
+# Day 4 (2026-07-10)
 
-### Objective
+## Objective
 
 Begin profiling the `customers` table after importing the data into PostgreSQL.
 
-### What I learned
+## What I learned
 
 - Data profiling should be performed before business analysis.
 - `COUNT(*)` counts all rows, whereas `COUNT(column)` counts only non-NULL values.
@@ -488,7 +488,7 @@ Begin profiling the `customers` table after importing the data into PostgreSQL.
 - ZIP codes are stored as `VARCHAR(5)` to preserve leading zeros.
 - Profiling queries should answer a business validation question, not just return data.
 
-### Work completed
+## Work completed
 
 - Connected VS Code to PostgreSQL.
 - Profiled row count.
@@ -497,10 +497,38 @@ Begin profiling the `customers` table after importing the data into PostgreSQL.
 - Validated duplicate `customer_unique_id`.
 - Wrote ZIP code validation queries.
 
-### Next session
+## Next session
 
 - Interpret ZIP code validation results.
 - Validate `customer_state`.
 - Validate `customer_city`.
 - Validate ID formats.
 - Complete profiling of the `customers` table.
+
+# Day 5 (11 July 2026) - Orders Data Profiling 
+
+## What I Learned
+
+- Reinforced the difference between **data profiling** and **data analysis**.
+  - Data profiling focuses on data quality, structure and validity.
+  - Data analysis answers business questions and generates insights.
+
+- Learned to validate timestamp relationships instead of assuming the data is correct.
+  - Purchase should occur before approval.
+  - Approval should occur before carrier delivery.
+  - Carrier delivery should occur before customer delivery.
+
+- Learned that real-world datasets can contain timeline inconsistencies.
+  - Not every unexpected result is a SQL mistake.
+  - Some anomalies represent genuine data quality issues that should be documented instead of corrected.
+
+- Understood the purpose of validating a foreign key using a `LEFT JOIN`.
+  - The goal is to verify that every referenced customer exists in the parent table.
+
+- Learned to write better profiling documentation by explaining the meaning of the results instead of only recording output numbers.
+
+- Confirmed that `order_status` contains only expected categories and documented their distribution as part of data profiling.
+
+## Key Takeaway
+
+A good data analyst does not try to prove the data is perfect. They identify, validate and document data quality issues before performing business analysis.

@@ -1,55 +1,93 @@
-# Olist SQL Project Roadmap
+# Olist SQL Data Analysis Project Roadmap
+
+---
 
 ## Phase 1 — Project Setup ✅
 
-- [x] Git repository initialized
-- [x] README created
-- [x] Project folder structure
-- [x] PostgreSQL database created
-- [x] VS Code connected to PostgreSQL
+- [x] Create project folder structure
+- [x] Initialize Git repository
+- [x] Create README.md
+- [x] Configure .gitignore
+- [x] Install PostgreSQL, pgAdmin 4 and VS Code
+- [x] Connect VS Code to PostgreSQL
 
 ---
 
-## Phase 2 — Database Design ✅
+## Phase 2 — Understand the Dataset ✅
 
-- [x] Understand dataset
-- [x] Study table relationships
+- [x] Study all CSV files
+- [x] Understand table relationships
 - [x] Draw rough ERD
-- [x] Design Customers table
-- [x] Design Orders table
+- [x] Understand business meaning of each table
 
 ---
 
-## Phase 3 — Import Data 🚧
+## Phase 3 — Database Design ✅
 
-- [x] Create tables
-- [x] Import customers.csv
+- [x] Design `customers` table
+- [x] Design `orders` table
+- [ ] Design remaining tables
+
+---
+
+## Phase 4 — Data Import 🚧
+
+- [x] Import `customers`
+- [x] Import `orders`
 - [ ] Import remaining tables
 
 ---
 
-## Phase 4 — Data Profiling 🚧
+## Phase 5 — Data Profiling 🚧
 
-### Customers Table
+### Customers ✅
 
-- [x] Verify row count
-- [x] Verify NULL values
-- [x] Verify duplicate customer_id
-- [x] Verify duplicate customer_unique_id
-- [x] Write ZIP code validation queries
-- [ ] Interpret ZIP validation results
-- [ ] Validate customer_state
-- [ ] Validate customer_city
-- [ ] Validate ID patterns
+- [x] Row count validation
+- [x] Missing value validation
+- [x] Primary key validation
+- [x] Business key validation
+- [x] ZIP code validation
+- [x] State validation
+- [x] Customer ID validation
+- [x] Overall assessment
+
+### Orders ✅
+
+- [x] Row count validation
+- [x] Missing value validation
+- [x] Primary key validation
+- [x] Foreign key validation
+- [x] Timestamp consistency validation
+- [x] Order status validation
+- [x] Overall assessment
+
+### Remaining Tables
+
+- [ ] Sellers
+- [ ] Products
+- [ ] Category Translation
+- [ ] Order Items
+- [ ] Payments
+- [ ] Reviews
+- [ ] Geolocation
 
 ---
 
-## Phase 5 — Business Analysis
+## Phase 6 — Exploratory Data Analysis
 
-Not started
+- [ ] Customer analysis
+- [ ] Sales analysis
+- [ ] Delivery analysis
+- [ ] Payment analysis
+- [ ] Product analysis
+- [ ] Seller analysis
+- [ ] Review analysis
 
 ---
 
-## Phase 6 — Dashboard & Documentation
+## Phase 7 — Final Documentation
 
-Not started
+- [ ] Clean SQL scripts
+- [ ] Final ERD
+- [ ] Project report
+- [ ] GitHub README improvements

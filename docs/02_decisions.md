@@ -146,3 +146,30 @@ This protects referential integrity and prevents orphan records.
   - Purpose
   - SQL query
 - Write an interpretation after important profiling results instead of only recording the SQL output.
+
+---
+
+## Day 5 (2026-07-11)
+
+### Decisions
+
+- Separate **data profiling** from **data analysis** throughout the project.
+  - Profiling validates data quality and structure.
+  - Analysis answers business questions and derives insights.
+
+- Treat timeline inconsistencies as **findings**, not immediate errors.
+  - Verify them with SQL.
+  - Document them.
+  - Do not modify the original dataset.
+
+- Document profiling results using interpretations rather than only recording output values.
+
+- Keep profiling focused on data quality checks. Business metrics (delivery time, yearly trends, monthly orders, etc.) will be performed later during the exploration phase.
+
+- Consider the `orders` table profiling complete after validating:
+  - Row count
+  - Missing values
+  - Primary key uniqueness
+  - Foreign key integrity
+  - Timestamp consistency
+  - Order status categories
