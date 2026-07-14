@@ -532,3 +532,69 @@ Begin profiling the `customers` table after importing the data into PostgreSQL.
 ## Key Takeaway
 
 A good data analyst does not try to prove the data is perfect. They identify, validate and document data quality issues before performing business analysis.
+
+# Day 6 (12 July 2026)
+
+## Objective
+- Understand the `sellers` dataset.
+- Learn how to import CSV files into PostgreSQL using VS Code.
+- Complete data profiling for the `sellers` table.
+
+---
+
+## What I Learned
+
+### 1. Understanding the Order Items Table
+- Learned that one order can contain multiple products.
+- Understood the purpose of `order_item_id` as the serial number of an item within an order.
+- Identified that `order_items` will eventually require a composite primary key.
+
+### 2. Planning Database Relationships
+- Identified `seller_id`, `product_id`, and `order_id` as foreign keys.
+- Learned that dependent tables should be created after their parent tables.
+
+### 3. Importing Data from VS Code
+- Connected VS Code to PostgreSQL using SQLTools.
+- Installed and used the PostgreSQL command-line tool (`psql`).
+- Learned to import CSV files using PostgreSQL's `\copy` command instead of pgAdmin.
+
+Example:
+```sql
+\copy sellers
+FROM 'C:/.../olist_sellers_dataset.csv'
+DELIMITER ','
+CSV HEADER;
+```
+
+### 4. Sellers Data Profiling
+Performed standard profiling checks on the `sellers` table:
+- Verified row count.
+- Checked for missing values.
+- Verified uniqueness of `seller_id`.
+- Validated identifier length.
+- Verified ZIP code length.
+- Confirmed leading zeros are preserved.
+- Validated state code length.
+- Reviewed valid seller states.
+- Explored normalized city names.
+- Identified cities with the highest number of sellers.
+
+### 5. Understanding Business Meaning
+- Understood why duplicate `customer_unique_id` values are expected.
+- Reinforced the difference between business rules and data quality issues.
+
+---
+
+## Key Takeaways
+- PostgreSQL's `\copy` command is a fast and reliable way to import CSV files.
+- Data profiling is about understanding the dataset before validation.
+- Not every duplicate indicates poor data quality; business context must always be considered.
+- SQL is becoming a tool for investigating data rather than simply writing queries.
+
+---
+
+## Progress
+- ✅ Sellers table created.
+- ✅ Sellers data imported using VS Code.
+- ✅ Sellers table profiling completed.
+- ⏳ Next: Begin work on the `products` table.

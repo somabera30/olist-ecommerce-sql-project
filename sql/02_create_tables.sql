@@ -19,3 +19,10 @@ CREATE TABLE orders (
     FOREIGN KEY (customer_id)
         REFERENCES customers(customer_id)
 );
+
+CREATE TABLE sellers (
+    seller_id TEXT PRIMARY KEY,
+    seller_zip_code_prefix VARCHAR(5),
+    seller_city TEXT NOT NULL,
+    seller_state CHAR(2) NOT NULL
+);

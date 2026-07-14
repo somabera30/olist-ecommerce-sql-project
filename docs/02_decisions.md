@@ -173,3 +173,22 @@ This protects referential integrity and prevents orphan records.
   - Foreign key integrity
   - Timestamp consistency
   - Order status categories
+
+  ## Decision 4 – Learn PostgreSQL Import Workflow
+
+**Date:** 12 July 2026
+
+### Context
+CSV files had previously been imported using pgAdmin.
+
+### Decision
+Adopt PostgreSQL's `\copy` command through the `psql` terminal as the primary method for importing datasets.
+
+### Reason
+- Works directly from VS Code.
+- Faster than using pgAdmin repeatedly.
+- Closer to real-world PostgreSQL workflows.
+- Easier to automate later with SQL scripts.
+
+### Impact
+Future dataset imports will be performed using `\copy` unless a different approach is required.

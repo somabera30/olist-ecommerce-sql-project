@@ -1,93 +1,99 @@
-# Olist SQL Data Analysis Project Roadmap
+# Project Roadmap
+
+## Phase 1 - Project Setup ✅
+- [x] Create project folder structure.
+- [x] Initialize Git repository.
+- [x] Create PostgreSQL database.
+- [x] Create SQL scripts for database and tables.
+- [x] Set up VS Code with SQLTools.
+- [x] Connect VS Code to PostgreSQL.
 
 ---
 
-## Phase 1 — Project Setup ✅
-
-- [x] Create project folder structure
-- [x] Initialize Git repository
-- [x] Create README.md
-- [x] Configure .gitignore
-- [x] Install PostgreSQL, pgAdmin 4 and VS Code
-- [x] Connect VS Code to PostgreSQL
-
----
-
-## Phase 2 — Understand the Dataset ✅
-
-- [x] Study all CSV files
-- [x] Understand table relationships
-- [x] Draw rough ERD
-- [x] Understand business meaning of each table
-
----
-
-## Phase 3 — Database Design ✅
-
-- [x] Design `customers` table
-- [x] Design `orders` table
-- [ ] Design remaining tables
-
----
-
-## Phase 4 — Data Import 🚧
-
-- [x] Import `customers`
-- [x] Import `orders`
-- [ ] Import remaining tables
-
----
-
-## Phase 5 — Data Profiling 🚧
+## Phase 2 - Data Understanding & Profiling 🚧
 
 ### Customers ✅
-
-- [x] Row count validation
-- [x] Missing value validation
-- [x] Primary key validation
-- [x] Business key validation
-- [x] ZIP code validation
-- [x] State validation
-- [x] Customer ID validation
-- [x] Overall assessment
+- [x] Profile customer dataset.
+- [x] Import into PostgreSQL.
+- [x] Complete SQL data profiling.
+- [x] Document findings.
 
 ### Orders ✅
+- [x] Profile orders dataset.
+- [x] Import into PostgreSQL.
+- [x] Complete SQL data profiling.
+- [x] Document findings.
 
-- [x] Row count validation
-- [x] Missing value validation
-- [x] Primary key validation
-- [x] Foreign key validation
-- [x] Timestamp consistency validation
-- [x] Order status validation
-- [x] Overall assessment
+### Sellers ✅
+- [x] Profile sellers dataset.
+- [x] Import into PostgreSQL.
+- [x] Complete SQL data profiling.
+- [x] Document findings.
 
-### Remaining Tables
+### Products
+- [ ] Create table.
+- [ ] Profile dataset.
+- [ ] Import data.
+- [ ] Complete SQL profiling.
 
-- [ ] Sellers
-- [ ] Products
-- [ ] Category Translation
-- [ ] Order Items
-- [ ] Payments
-- [ ] Reviews
-- [ ] Geolocation
+### Geolocation
+- [ ] Create table.
+- [ ] Profile dataset.
+- [ ] Import data.
+- [ ] Complete SQL profiling.
+
+### Order Items
+- [ ] Design composite primary key.
+- [ ] Create table.
+- [ ] Import data.
+- [ ] Complete SQL profiling.
+
+### Payments
+- [ ] Create table.
+- [ ] Import data.
+- [ ] Profile dataset.
+
+### Reviews
+- [ ] Create table.
+- [ ] Import data.
+- [ ] Profile dataset.
+
+### Product Category Translation
+- [ ] Create table.
+- [ ] Import data.
+- [ ] Profile dataset.
 
 ---
 
-## Phase 6 — Exploratory Data Analysis
-
-- [ ] Customer analysis
-- [ ] Sales analysis
-- [ ] Delivery analysis
-- [ ] Payment analysis
-- [ ] Product analysis
-- [ ] Seller analysis
-- [ ] Review analysis
+## Phase 3 - Data Validation
+- [ ] Create validation queries.
+- [ ] Validate primary keys.
+- [ ] Validate foreign keys.
+- [ ] Validate business rules.
+- [ ] Document validation results.
 
 ---
 
-## Phase 7 — Final Documentation
+## Phase 4 - Exploratory Data Analysis (EDA)
+- [ ] Customer analysis.
+- [ ] Sales analysis.
+- [ ] Product analysis.
+- [ ] Seller analysis.
+- [ ] Delivery performance analysis.
+- [ ] Payment analysis.
+- [ ] Customer review analysis.
 
-- [ ] Clean SQL scripts
-- [ ] Final ERD
-- [ ] Project report
-- [ ] GitHub README improvements
+---
+
+## Phase 5 - Business Insights
+- [ ] Answer business questions.
+- [ ] Build analytical SQL queries.
+- [ ] Document insights.
+
+---
+
+## Phase 6 - Project Completion
+- [ ] Final documentation.
+- [ ] Repository cleanup.
+- [ ] README improvements.
+- [ ] Final GitHub push.
