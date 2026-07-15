@@ -30,7 +30,14 @@
 - [x] Complete SQL data profiling.
 - [x] Document findings.
 
-### Products
+### Products ✅
+- [x] Create table.
+- [x] Profile dataset.
+- [x] Import data.
+- [x] Complete SQL profiling.
+- [x] Document findings.
+
+### Product Category Translation
 - [ ] Create table.
 - [ ] Profile dataset.
 - [ ] Import data.
@@ -39,12 +46,6 @@
 ### Geolocation
 - [ ] Create table.
 - [ ] Profile dataset.
-- [ ] Import data.
-- [ ] Complete SQL profiling.
-
-### Order Items
-- [ ] Design composite primary key.
-- [ ] Create table.
 - [ ] Import data.
 - [ ] Complete SQL profiling.
 
@@ -58,10 +59,11 @@
 - [ ] Import data.
 - [ ] Profile dataset.
 
-### Product Category Translation
+### Order Items
+- [ ] Design composite primary key.
 - [ ] Create table.
 - [ ] Import data.
-- [ ] Profile dataset.
+- [ ] Complete SQL profiling.
 
 ---
 
@@ -95,5 +97,5 @@
 ## Phase 6 - Project Completion
 - [ ] Final documentation.
 - [ ] Repository cleanup.
-- [ ] README improvements.
+- [ ] Improve README.
 - [ ] Final GitHub push.
