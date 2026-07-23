@@ -1,101 +1,86 @@
-# Project Roadmap
+## Project Roadmap
 
-## Phase 1 - Project Setup ✅
-- [x] Create project folder structure.
-- [x] Initialize Git repository.
-- [x] Create PostgreSQL database.
-- [x] Create SQL scripts for database and tables.
-- [x] Set up VS Code with SQLTools.
-- [x] Connect VS Code to PostgreSQL.
-
----
-
-## Phase 2 - Data Understanding & Profiling 🚧
-
-### Customers ✅
-- [x] Profile customer dataset.
-- [x] Import into PostgreSQL.
-- [x] Complete SQL data profiling.
-- [x] Document findings.
-
-### Orders ✅
-- [x] Profile orders dataset.
-- [x] Import into PostgreSQL.
-- [x] Complete SQL data profiling.
-- [x] Document findings.
-
-### Sellers ✅
-- [x] Profile sellers dataset.
-- [x] Import into PostgreSQL.
-- [x] Complete SQL data profiling.
-- [x] Document findings.
-
-### Products ✅
-- [x] Create table.
-- [x] Profile dataset.
-- [x] Import data.
-- [x] Complete SQL profiling.
-- [x] Document findings.
-
-### Product Category Translation
-- [ ] Create table.
-- [ ] Profile dataset.
-- [ ] Import data.
-- [ ] Complete SQL profiling.
-
-### Geolocation
-- [ ] Create table.
-- [ ] Profile dataset.
-- [ ] Import data.
-- [ ] Complete SQL profiling.
-
-### Payments
-- [ ] Create table.
-- [ ] Import data.
-- [ ] Profile dataset.
-
-### Reviews
-- [ ] Create table.
-- [ ] Import data.
-- [ ] Profile dataset.
-
-### Order Items
-- [ ] Design composite primary key.
-- [ ] Create table.
-- [ ] Import data.
-- [ ] Complete SQL profiling.
+### ✅ Phase 1: Environment Setup (Completed)
+- [x] Install PostgreSQL
+- [x] Install pgAdmin 4
+- [x] Install VS Code
+- [x] Install PostgreSQL Extension
+- [x] Install Git
+- [x] Configure project folder
+- [x] Initialize Git repository
 
 ---
 
-## Phase 3 - Data Validation
-- [ ] Create validation queries.
-- [ ] Validate primary keys.
-- [ ] Validate foreign keys.
-- [ ] Validate business rules.
-- [ ] Document validation results.
+### ✅ Phase 2: Database Design (Completed)
+- [x] Study the complete dataset
+- [x] Understand relationships between tables
+- [x] Create ERD
+- [x] Design table structures
+- [x] Define primary and foreign keys
 
 ---
 
-## Phase 4 - Exploratory Data Analysis (EDA)
-- [ ] Customer analysis.
-- [ ] Sales analysis.
-- [ ] Product analysis.
-- [ ] Seller analysis.
-- [ ] Delivery performance analysis.
-- [ ] Payment analysis.
-- [ ] Customer review analysis.
+### 🚧 Phase 3: Database Creation & Data Profiling (In Progress)
+
+#### Completed
+- [x] Customers
+- [x] Orders
+- [x] Sellers
+- [x] Products
+- [x] Product Category Name Translation
+- [x] Geolocation
+
+#### Remaining
+- [ ] Payments
+- [ ] Reviews
+- [ ] Order Items
 
 ---
 
-## Phase 5 - Business Insights
-- [ ] Answer business questions.
-- [ ] Build analytical SQL queries.
-- [ ] Document insights.
+### ⏳ Phase 4: Data Cleaning & Quality Review
+- [ ] Review profiling findings
+- [ ] Document data quality issues
+- [ ] Decide which anomalies to retain or exclude during analysis
+- [ ] Create cleaned views/CTEs where required
 
 ---
 
-## Phase 6 - Project Completion
-- [ ] Final documentation.
-- [ ] Repository cleanup.
-- [ ] Improve README.
-- [ ] Final GitHub push.
+### ⏳ Phase 5: Exploratory Data Analysis (EDA)
+- [ ] Customer Analysis
+- [ ] Order Analysis
+- [ ] Product Analysis
+- [ ] Seller Analysis
+- [ ] Payment Analysis
+- [ ] Delivery Performance
+- [ ] Review Analysis
+- [ ] Geographic Analysis
+
+---
+
+### ⏳ Phase 6: Advanced SQL
+- [ ] Complex JOINs
+- [ ] Common Table Expressions (CTEs)
+- [ ] Window Functions
+- [ ] Subqueries
+- [ ] CASE Expressions
+- [ ] Aggregate Reporting
+
+---
+
+### ⏳ Phase 7: Business Case Studies
+- [ ] Sales Performance
+- [ ] Customer Behaviour
+- [ ] Seller Performance
+- [ ] Product Performance
+- [ ] Delivery Analysis
+- [ ] Customer Satisfaction
+- [ ] Revenue Insights
+
+---
+
+### ⏳ Phase 8: Portfolio Project
+- [ ] Organize SQL scripts
+- [ ] Update README
+- [ ] Document project methodology
+- [ ] Upload final project to GitHub
+- [ ] Review and polish portfolio

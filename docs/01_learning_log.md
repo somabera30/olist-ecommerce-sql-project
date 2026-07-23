@@ -61,3 +61,43 @@ Performed SQL profiling on the `products` table:
 - ✅ Products dataset imported.
 - ✅ Products data profiling completed.
 - ⏳ Next: Begin work on the `category_translation` table.
+
+# Learning Log – Day 8
+**Date:** 15 July 2026
+
+## What I Learned
+
+### 1. Reference Table vs Transaction Table
+- Learned that the `geolocation` table is a reference dataset used to map ZIP codes to geographical coordinates.
+- Understood that it is different from transaction tables like `orders` or master tables like `customers`.
+
+### 2. Not Every Table Needs a Primary Key
+- Learned that some datasets may not contain a natural primary key.
+- Verified that `geolocation` contains exact duplicate rows, making it impossible to define a meaningful primary key.
+
+### 3. Exact Duplicate Rows vs Expected Duplicate Values
+- Learned to distinguish between:
+  - Exact duplicate rows (same values in every column), which indicate duplicate records.
+  - Duplicate ZIP codes, which are expected because multiple locations can share the same ZIP code.
+
+### 4. One-to-Many Join Problem
+- Understood that joining `customers` directly with `geolocation` on ZIP code can multiply rows because one ZIP code may correspond to multiple geolocation records.
+- Learned why this causes row explosion during joins.
+
+### 5. Preparing Data Before Analysis
+- Learned that raw datasets are not always suitable for direct analysis.
+- Understood that creating a derived dataset (using `DISTINCT`, aggregation, CTEs, or views) before joining is often necessary to produce meaningful results.
+
+### 6. Coordinate Validation
+- Learned that valid Earth coordinates satisfy:
+  - Latitude: -90 to 90
+  - Longitude: -180 to 180
+- Used these business rules to validate coordinate data.
+
+### 7. Cross-Table Validation
+- Performed validation between `customers`, `sellers`, and `geolocation` to identify ZIP codes without corresponding geolocation records.
+
+## Progress
+- Completed Business Understanding for the `geolocation` table.
+- Created and imported the `geolocation` table.
+- Completed SQL data profiling and documented interpretations for all profiling checks.

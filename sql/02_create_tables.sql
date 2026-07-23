@@ -38,3 +38,16 @@ CREATE TABLE products (
     product_height_cm INT,
     product_width_cm INT
 );
+
+CREATE TABLE product_category_name_translation (
+    product_category_name VARCHAR(70),
+    product_category_name_english VARCHAR(70)
+);
+
+CREATE TABLE geolocation (
+    geolocation_zip_code_prefix CHAR(5),
+    geolocation_lat DOUBLE PRECISION,
+    geolocation_lng DOUBLE PRECISION,
+    geolocation_city VARCHAR(70),
+    geolocation_state CHAR(2)
+);
