@@ -51,3 +51,30 @@ CREATE TABLE geolocation (
     geolocation_city VARCHAR(70),
     geolocation_state CHAR(2)
 );
+
+CREATE TABLE payments (
+    order_id TEXT,
+    payment_sequential INT,
+    payment_type VARCHAR(20),
+    payment_installments INT,
+    payment_value NUMERIC(10,2),
+
+    PRIMARY KEY (order_id, payment_sequential),
+
+    FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+);
+
+CREATE TABLE reviews (
+    review_id TEXT,
+    order_id TEXT NOT NULL,
+    review_score INT NOT NULL,
+    review_comment_title VARCHAR(100),
+    review_comment_message VARCHAR(500),
+    review_creation_date TIMESTAMP,
+    review_answer_timestamp TIMESTAMP,
+
+    CONSTRAINT fk_reviews_order
+        FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+);

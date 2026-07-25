@@ -101,3 +101,123 @@ Performed SQL profiling on the `products` table:
 - Completed Business Understanding for the `geolocation` table.
 - Created and imported the `geolocation` table.
 - Completed SQL data profiling and documented interpretations for all profiling checks.
+
+````markdown
+# Learning Log – Day 10
+**Date:** 24 July 2026
+
+## Objective
+Profile the **reviews** table by validating data quality, understanding its structure, and identifying potential data issues before moving to exploratory analysis.
+
+---
+
+## Tasks Completed
+
+### 1. Created the Reviews Table
+- Designed the `reviews` table based on the dataset and documentation.
+- Chose appropriate PostgreSQL data types and constraints.
+
+---
+
+### 2. Imported the Dataset
+- Attempted to import the CSV using the default UTF-8 encoding.
+- Encountered a character encoding error.
+- Identified that the Kaggle dataset is encoded in **LATIN1 (WIN1252)**.
+- Successfully imported the dataset using:
+
+```sql
+\copy reviews
+FROM '.../olist_order_reviews_dataset.csv'
+WITH (
+    FORMAT csv,
+    HEADER,
+    DELIMITER ',',
+    ENCODING 'LATIN1'
+);
+```
+
+---
+
+## Data Profiling Completed
+
+Performed the following profiling checks:
+
+1. Row count validation
+2. Missing value analysis
+3. Duplicate `review_id` validation
+4. Duplicate `order_id` validation
+5. `review_id` length validation
+6. `order_id` length validation
+7. Review score range validation (1–5)
+8. Timestamp consistency validation
+9. Foreign key validation (Reviews → Orders)
+10. Foreign key validation (Orders → Reviews)
+
+---
+
+## Key Findings
+
+- Imported **99,224** review records successfully.
+- `review_comment_title` contains **11,568 NULL values**.
+- `review_comment_message` contains **40,977 NULL values**.
+- Many customers submitted ratings without writing comments.
+- `review_id` is **not unique**.
+  - Some review IDs appear twice.
+  - A few appear three times.
+- `order_id` is also **not unique**.
+  - Some orders contain multiple review records.
+- All `review_id` values are valid 32-character identifiers.
+- All `order_id` values are valid 32-character identifiers.
+- Every review score lies within the valid range of **1–5**.
+- No review answer timestamp occurs before its creation date.
+- Every review belongs to an existing order.
+- Every order has at least one corresponding review record.
+
+---
+
+## Problems Encountered
+
+### CSV Import Failure
+
+The dataset could not be imported initially because PostgreSQL expected UTF-8 encoding while the CSV file was encoded in WIN1252 (LATIN1).
+
+### Resolution
+
+Imported the dataset successfully by specifying:
+
+- `ENCODING 'LATIN1'`
+
+---
+
+## Concepts Learned
+
+- Character encoding can prevent successful CSV imports.
+- PostgreSQL allows encoding to be specified during `\copy`.
+- A business identifier (`review_id`) is not always a database primary key.
+- Data profiling focuses on validating data quality rather than explaining business behavior.
+- Foreign key validation can be performed using `LEFT JOIN`.
+- Timestamp validation helps verify chronological consistency.
+
+---
+
+## Progress Summary
+
+Completed profiling for:
+
+- ✅ Customers
+- ✅ Sellers
+- ✅ Products
+- ✅ Product Category Translation
+- ✅ Geolocation
+- ✅ Payments
+- ✅ Reviews
+
+---
+
+## Next Steps
+
+- Profile the `order_items` table.
+- Complete profiling for all remaining datasets.
+- Begin exploratory data analysis (EDA) and business insights.
+```
+````
