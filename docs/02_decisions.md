@@ -124,3 +124,203 @@ Questions such as *why an order has multiple reviews* or *customer review behavi
 - Data profiling should validate data quality without drawing business conclusions.
 - Referential integrity checks are an important part of profiling relational datasets.
 ```
+
+# Decision Log – Day 11
+
+**Date:** 2026-07-26
+
+---
+
+# Decision 1: Use a Composite Primary Key for `order_items`
+
+### Decision
+Defined `(order_id, order_item_id)` as the composite primary key.
+
+### Reason
+`order_item_id` is unique only within a particular order and restarts from 1 for each new order.
+
+### Benefit
+Ensures every order item is uniquely identified while accurately reflecting the dataset structure.
+
+---
+
+# Decision 2: Keep All Foreign Key Constraints
+
+### Decision
+Maintained foreign key relationships from `order_items` to:
+
+- orders
+- products
+- sellers
+
+### Reason
+Data profiling confirmed there are no orphan records.
+
+### Benefit
+Maintains referential integrity and improves database reliability.
+
+---
+
+# Decision 3: Keep Profiling Scripts Separate by Table
+
+### Decision
+Split one large profiling SQL file into individual profiling scripts.
+
+### Reason
+A single profiling file became difficult to navigate and maintain.
+
+### Benefit
+
+- Better readability
+- Easier debugging
+- Faster navigation
+- More professional project organization
+
+---
+
+# Decision 4: Organize SQL Files by Development Phase
+
+### Decision
+Structured SQL files into logical stages.
+
+### Final Structure
+
+```
+01_create_database.sql
+02_create_tables.sql
+03_import_data.sql
+
+04_01_customers_profiling.sql
+...
+04_09_order_items_profiling.sql
+
+05_exploratory_data_analysis.sql
+
+06_business_insights.sql
+```
+
+### Benefit
+
+- Clear execution order
+- Easier for recruiters to follow
+- Better maintainability
+
+---
+
+# Decision 5: Keep Data Import Commands in a Separate File
+
+### Decision
+Store all `COPY` commands inside `03_import_data.sql`.
+
+### Reason
+Separates schema creation from data loading.
+
+### Benefit
+
+The database can be recreated quickly by executing:
+
+1. Create Database
+2. Create Tables
+3. Import Data
+
+---
+
+# Decision 6: Document Database Design
+
+### Decision
+Create a dedicated `database_design.md` document.
+
+### Reason
+The README should provide a project overview, while detailed database design deserves its own documentation.
+
+### Benefit
+
+Keeps project documentation organized and easier to navigate.
+
+---
+
+# Decision 7: Create an ER Diagram
+
+### Decision
+Generate the Entity Relationship Diagram using **dbdiagram.io**.
+
+### Reason
+Visualizing relationships makes the schema easier to understand than SQL alone.
+
+### Benefit
+
+- Improves documentation
+- Helps reviewers understand the database quickly
+- Adds professionalism to the GitHub repository
+
+---
+
+# Decision 8: Keep Reference Tables Independent
+
+### Decision
+Do not create additional foreign keys for:
+
+- `geolocation`
+- `product_category_name_translation`
+
+### Reason
+
+- ZIP code prefixes are not unique in the geolocation dataset.
+- Product category translation is a lookup table without a reliable unique key for enforcing a foreign key relationship.
+
+### Benefit
+
+Avoids incorrect relationships while preserving data integrity.
+
+---
+
+# Decision 9: Separate EDA from Data Profiling
+
+### Decision
+End the database development phase after profiling and validation.
+
+Exploratory Data Analysis (EDA) and Business Insights will be completed in a separate stage.
+
+### Reason
+
+Profiling answers:
+
+> "Is the data clean and reliable?"
+
+EDA answers:
+
+> "What insights can the data provide?"
+
+These are different objectives.
+
+### Benefit
+
+Creates a clear project workflow:
+
+1. Database Setup
+2. Data Profiling
+3. Exploratory Data Analysis
+4. Business Insights
+
+---
+
+# Decision 10: Conclude the Database Development Phase
+
+### Decision
+Treat the database implementation as complete after:
+
+- Database creation
+- Table creation
+- Data import
+- Data profiling
+- Validation
+- ER diagram
+- Project organization
+
+### Reason
+
+The project now has a complete and validated relational database ready for analytical queries.
+
+### Outcome
+
+The next phase will focus entirely on SQL analysis and business insights rather than database implementation.

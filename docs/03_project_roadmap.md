@@ -1,25 +1,42 @@
 # Project Roadmap
-**Project:** Olist E-commerce SQL Data Analysis
+
+## Project
+**Olist E-commerce SQL Project**
+
+**Objective:**
+Build a production-style PostgreSQL database from raw CSV files, validate the data quality through SQL profiling, perform exploratory data analysis (EDA), and generate business insights that demonstrate SQL and analytical skills.
 
 ---
 
-## Phase 1: Environment Setup ✅
+# Phase 1 — Database Development ✅ COMPLETED
+
+## Environment Setup
 - [x] Install PostgreSQL
 - [x] Install pgAdmin 4
 - [x] Install VS Code
-- [x] Install PostgreSQL Extension
 - [x] Install Git
-- [x] Create project folder structure
-- [x] Initialize Git repository
-- [x] Create README.md
-- [x] Create .gitignore
+- [x] Create Git repository
 
 ---
 
-## Phase 2: Database Design & Data Profiling
+## Database Design
+- [x] Understand all datasets
+- [x] Design database schema
+- [x] Select appropriate data types
+- [x] Define primary keys
+- [x] Define composite primary keys
+- [x] Define foreign keys
 
-### Tables Completed ✅
+---
 
+## Database Implementation
+- [x] Create database
+- [x] Create all tables
+- [x] Import all CSV datasets
+
+---
+
+## Data Profiling & Validation
 - [x] Customers
 - [x] Orders
 - [x] Sellers
@@ -28,59 +45,65 @@
 - [x] Geolocation
 - [x] Payments
 - [x] Reviews
-
-### Remaining
-
-- [ ] Order Items
+- [x] Order Items
 
 ---
 
-## Phase 3: Database Finalization
-
-- [ ] Review constraints after profiling
-- [ ] Add constraints where appropriate
-- [ ] Final schema review
-- [ ] ER Diagram verification
+## Documentation
+- [x] Learning Logs
+- [x] Decision Logs
+- [x] Database Design
+- [x] ER Diagram
+- [x] Organize project structure
 
 ---
 
-## Phase 4: Exploratory Data Analysis (EDA)
+# Phase 2 — Exploratory Data Analysis (Next)
 
+## Business Exploration
 - [ ] Customer Analysis
-- [ ] Sales Analysis
+- [ ] Order Analysis
 - [ ] Product Analysis
 - [ ] Seller Analysis
 - [ ] Payment Analysis
 - [ ] Review Analysis
 - [ ] Delivery Analysis
-- [ ] Geographic Analysis
 
 ---
 
-## Phase 5: Advanced SQL
-
-- [ ] CTEs
-- [ ] Window Functions
-- [ ] Ranking
-- [ ] Running Totals
-- [ ] Cohort Analysis
-- [ ] Customer Segmentation
-
----
-
-## Phase 6: Portfolio Preparation
-
-- [ ] Clean SQL scripts
-- [ ] Update README
-- [ ] Documentation
-- [ ] GitHub upload
-- [ ] Final project review
+## Business Insights
+- [ ] Revenue Analysis
+- [ ] Sales Trends
+- [ ] Top Products
+- [ ] Top Categories
+- [ ] Seller Performance
+- [ ] Customer Behavior
+- [ ] Delivery Performance
+- [ ] Payment Preferences
+- [ ] Customer Satisfaction
 
 ---
 
-## Current Progress
+# Phase 3 — Portfolio Preparation
 
-**Overall Progress:** ~80%
+- [ ] Improve README
+- [ ] Export important query results
+- [ ] Create project screenshots
+- [ ] Publish GitHub repository
+- [ ] (Optional) Build Power BI / Tableau dashboard
 
-Current Focus:
-- Complete profiling for the final table (`order_items`).
+---
+
+# Current Status
+
+## Database Development
+**100% Complete** ✅
+
+## Exploratory Data Analysis
+**Not Started**
+
+## Business Insights
+**Not Started**
+
+## Portfolio
+**In Progress**

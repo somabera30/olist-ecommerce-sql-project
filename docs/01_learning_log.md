@@ -221,3 +221,234 @@ Completed profiling for:
 - Begin exploratory data analysis (EDA) and business insights.
 ```
 ````
+# Learning Log – Day 11
+
+**Date:** 2026-07-26
+
+## Objective
+
+Complete the database design phase of the Olist E-commerce SQL project by:
+
+- Finalizing the last table (`order_items`)
+- Reviewing the entire database schema
+- Organizing the project structure
+- Creating the Entity Relationship Diagram (ERD)
+- Preparing the project for Exploratory Data Analysis (EDA)
+
+---
+
+# Tasks Completed
+
+## 1. Understood the `order_items` Dataset
+
+Reviewed every column and documented its purpose.
+
+### Key observations
+
+- One order can contain multiple products.
+- `order_item_id` is unique only within an order.
+- The same product can be sold by multiple sellers.
+- Shipping limit date represents the deadline for the seller to hand the item to the logistics partner.
+- Freight value represents the delivery charge associated with an order item.
+
+---
+
+## 2. Designed the `order_items` Table
+
+Created the PostgreSQL table using appropriate data types and constraints.
+
+### Design decisions
+
+- Composite Primary Key:
+  - `(order_id, order_item_id)`
+
+- Foreign Keys:
+  - `order_id → orders`
+  - `product_id → products`
+  - `seller_id → sellers`
+
+- All columns were defined as `NOT NULL` after validating the dataset.
+
+---
+
+## 3. Imported the Dataset
+
+Imported the `order_items` CSV successfully into PostgreSQL.
+
+Verified that:
+
+- All expected rows were imported.
+- No import errors occurred.
+
+---
+
+## 4. Completed Data Profiling for `order_items`
+
+Performed comprehensive profiling checks, including:
+
+- Row count verification
+- Missing value validation
+- Duplicate detection
+- Composite primary key validation
+- Identifier length validation
+- Price validation
+- Freight value validation
+- Shipping date validation
+- Foreign key validation with:
+  - Orders
+  - Products
+  - Sellers
+
+Documented interpretations for every profiling check.
+
+---
+
+## 5. Reviewed the Entire Database
+
+Performed a complete review of the database schema.
+
+Verified:
+
+- Primary keys
+- Composite primary keys
+- Foreign keys
+- Relationships between tables
+- Referential integrity
+- Overall normalization
+
+Confirmed that the database structure is suitable for SQL analysis.
+
+---
+
+## 6. Improved Project Structure
+
+Reorganized SQL files into a cleaner workflow.
+
+Current structure:
+
+```text
+sql/
+│
+├── 01_create_database.sql
+├── 02_create_tables.sql
+├── 03_import_data.sql
+│
+├── 04_01_customers_profiling.sql
+├── 04_02_orders_profiling.sql
+├── 04_03_sellers_profiling.sql
+├── 04_04_products_profiling.sql
+├── 04_05_product_category_translation_profiling.sql
+├── 04_06_geolocation_profiling.sql
+├── 04_07_payments_profiling.sql
+├── 04_08_reviews_profiling.sql
+├── 04_09_order_items_profiling.sql
+│
+├── 05_exploratory_data_analysis.sql
+└── 06_business_insights.sql
+```
+
+This organization separates:
+
+- Database setup
+- Data profiling
+- Exploratory analysis
+- Business insights
+
+making the project easier to understand and maintain.
+
+---
+
+## 7. Created the ER Diagram
+
+Generated the complete Entity Relationship Diagram using **dbdiagram.io**.
+
+The ERD includes:
+
+- Customers
+- Orders
+- Sellers
+- Products
+- Payments
+- Reviews
+- Order Items
+
+Reference tables:
+
+- Geolocation
+- Product Category Name Translation
+
+Verified that the ERD matches the implemented PostgreSQL schema.
+
+---
+
+## 8. Planned Project Documentation
+
+Created a documentation structure for the project.
+
+Planned documents include:
+
+- Learning Log
+- Decision Log
+- Project Roadmap
+- Database Design
+
+This separates technical implementation from project documentation.
+
+---
+
+# Key Learnings
+
+Today I learned that designing a database involves much more than creating tables.
+
+Important lessons include:
+
+- Choosing appropriate primary keys and composite primary keys.
+- Using foreign keys only where the data reliably supports referential integrity.
+- Organizing SQL scripts into logical stages.
+- Creating an ER diagram that reflects the implemented schema instead of an idealized model.
+- Keeping project documentation structured and aligned with the actual implementation.
+
+I also gained a better understanding of how database design supports future exploratory analysis and business reporting.
+
+---
+
+# Challenges Faced
+
+- Determining the correct primary key for `order_items`.
+- Understanding why `geolocation` should remain an independent table.
+- Deciding not to enforce a foreign key for the product category translation table.
+- Organizing profiling scripts into a cleaner project structure.
+- Learning to generate and review an ER diagram.
+
+---
+
+# Current Project Status
+
+## Database Phase
+
+- ✅ Database Created
+- ✅ Tables Created
+- ✅ Data Imported
+- ✅ Data Profiling Completed
+- ✅ Referential Integrity Validated
+- ✅ Database Design Reviewed
+- ✅ Entity Relationship Diagram Completed
+- ✅ Project Structure Organized
+
+## Next Phase
+
+- ⬜ Exploratory Data Analysis (EDA)
+- ⬜ Business Insights
+- ⬜ Dashboard / Visualization (Optional)
+- ⬜ Final README Enhancement
+- ⬜ GitHub Portfolio Publication
+
+---
+
+# Reflection
+
+The database development phase is now complete.
+
+The project has progressed from raw CSV files to a fully structured PostgreSQL database with validated data quality, documented profiling results, and a normalized relational design.
+
+The next stage will focus on using SQL to answer business questions, perform exploratory data analysis, and generate insights that demonstrate analytical thinking rather than database implementation skills.

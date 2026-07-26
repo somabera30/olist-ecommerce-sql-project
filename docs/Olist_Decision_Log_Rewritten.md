@@ -1,233 +1,374 @@
-\
 # Olist E-commerce SQL Project
 # Decision Log
 
-> **Purpose**
+> ## Purpose
 >
-> This document records important design and workflow decisions made during the project.
-> It focuses on **why** a decision was made, not simply **what** was done.
-> Future projects can reuse these decisions unless business requirements differ.
+> This document records the important architectural and implementation decisions made during the project.
+>
+> Each decision explains **why a particular approach was chosen**, the alternatives considered where relevant, and its impact on the overall project.
+>
+> Unlike the Learning Log, this document focuses only on project-specific decisions that influenced the final database design, workflow, or repository organization.
 
 ---
 
 # Table of Contents
 
 1. Database Schema Decisions
-2. Data Validation & Profiling Decisions
-3. Workflow Decisions
-4. Documentation Standards
+2. Data Import Decisions
+3. Relationship & Constraint Decisions
+4. Project Organization Decisions
+5. Documentation Decisions
 
 ---
 
 # 1. Database Schema Decisions
 
-## Decision 1 – Store `customer_id` as TEXT
+## Decision 1 – Store Business Identifiers as TEXT
 
-**Context**
-Customer IDs uniquely identify customers.
+### Context
 
-**Decision**
-Store as `TEXT`.
+Columns such as `customer_id`, `order_id`, `product_id`, and `seller_id` uniquely identify business entities but are never used in arithmetic operations.
 
-**Reasoning**
-- It is an identifier, not a numeric value.
-- Arithmetic operations will never be performed.
-- Preserves the original identifier format.
+### Decision
 
-**Impact**
-Use the ID only for identification and joins.
+Store business identifiers using the `TEXT` data type.
 
----
+### Reasoning
 
-## Decision 2 – Store `order_id` as TEXT
+- These columns represent identifiers rather than numeric values.
+- Leading zeros or formatting should be preserved.
+- Numeric storage provides no analytical benefit.
 
-**Context**
-Order IDs uniquely identify orders.
+### Impact
 
-**Decision**
-Store as `TEXT`.
-
-**Reasoning**
-- Functions purely as an identifier.
-- Numeric storage provides no benefit.
+Identifiers remain unchanged and are suitable for joins without implying numerical meaning.
 
 ---
 
-## Decision 3 – Store `customer_zip_code_prefix` as VARCHAR(5)
+## Decision 2 – Store ZIP Code Prefix as VARCHAR(5)
 
-**Context**
-ZIP codes contain leading zeros.
+### Context
 
-**Decision**
-Store as `VARCHAR(5)`.
+Brazilian ZIP code prefixes may contain leading zeros.
 
-**Reasoning**
-- ZIP codes are identifiers.
-- Leading zeros must be preserved.
+### Decision
 
----
+Store `customer_zip_code_prefix` and similar ZIP code columns as `VARCHAR(5)`.
 
-## Decision 4 – Do Not Make `customer_unique_id` UNIQUE
+### Reasoning
 
-**Context**
-One real customer may create multiple platform accounts.
+ZIP codes identify locations rather than quantities.
 
-**Decision**
-Do not apply a UNIQUE constraint.
+### Impact
 
-**Reasoning**
-- Represents the customer, not an individual account.
-- Duplicate values are expected by business design.
-
-**Impact**
-Future analyses can distinguish customer-level and account-level behaviour.
+Original formatting is preserved and location identifiers remain accurate.
 
 ---
 
-## Decision 5 – Store `order_status` as VARCHAR(20)
+## Decision 3 – Do Not Enforce a UNIQUE Constraint on `customer_unique_id`
 
-**Context**
-The column stores a limited set of short status values.
+### Context
 
-**Decision**
-Store as `VARCHAR(20)`.
+Data profiling showed that one customer may appear in multiple platform accounts.
 
-**Reasoning**
-A long text field is unnecessary.
+### Decision
 
----
+Allow duplicate values in `customer_unique_id`.
 
-## Decision 6 – Timestamp NULL Rules
+### Reasoning
 
-| Column | Decision | Reason |
-|--------|----------|--------|
-| order_purchase_timestamp | NOT NULL | Every order must have a purchase time. |
-| order_approved_at | NULL | Cancelled or failed orders may never be approved. |
-| order_delivered_customer_date | NULL | Some orders are never delivered. |
+The column identifies the person rather than an individual account.
+
+### Impact
+
+Future analyses can distinguish customer-level behavior from account-level behavior.
 
 ---
 
-## Decision 7 – Enforce Customer Foreign Key
+## Decision 4 – Define Composite Primary Key for `order_items`
 
-**Decision**
+### Context
+
+`order_item_id` restarts from 1 for every order and is not globally unique.
+
+### Decision
+
+Use `(order_id, order_item_id)` as the composite primary key.
+
+### Reasoning
+
+Only the combination uniquely identifies an order item.
+
+### Impact
+
+The schema accurately reflects the business process while maintaining row uniqueness.
+
+---
+
+## Decision 5 – Apply NULL Constraints Based on Business Rules
+
+### Context
+
+Some business events may legitimately never occur.
+
+### Decision
+
+Allow NULL only where the business process supports missing values.
+
+Examples include:
+
+- Delivery timestamps
+- Approval timestamps
+- Review comments
+
+### Reasoning
+
+Business meaning is more reliable than assumptions drawn from sample data.
+
+### Impact
+
+The schema represents real-world business behavior more accurately.
+
+---
+
+# 2. Data Import Decisions
+
+## Decision 6 – Use PostgreSQL `\copy` for Bulk Imports
+
+### Context
+
+Data was initially imported using pgAdmin.
+
+### Decision
+
+Standardize on PostgreSQL's `\copy` command.
+
+### Reasoning
+
+- Faster
+- Easier to automate
+- Works directly from the terminal
+- Better reflects real-world PostgreSQL workflows
+
+### Impact
+
+Data imports became more reproducible and easier to maintain.
+
+---
+
+## Decision 7 – Import Reviews Dataset Using LATIN1 Encoding
+
+### Context
+
+The Reviews CSV could not be imported using the default UTF-8 encoding.
+
+### Decision
+
+Import the dataset using `ENCODING 'LATIN1'`.
+
+### Reasoning
+
+The source CSV was encoded using WIN1252/LATIN1.
+
+### Impact
+
+The dataset imported successfully without modifying the original source file.
+
+---
+
+# 3. Relationship & Constraint Decisions
+
+## Decision 8 – Enforce Customer Foreign Key
+
+### Context
+
+Every order should belong to an existing customer.
+
+### Decision
+
+Create a foreign key:
 
 `orders.customer_id → customers.customer_id`
 
-**Reasoning**
-An order cannot exist without a valid customer.
+### Reasoning
 
-**Impact**
+Orders cannot exist independently of customers.
+
+### Impact
+
 Maintains referential integrity and prevents orphan records.
 
 ---
 
-# 2. Data Validation & Profiling Decisions
+## Decision 9 – Preserve Foreign Keys in `order_items`
 
-## Decision 8 – Profile Data Before Analysis
+### Context
 
-**Decision**
-Always complete data profiling before answering business questions.
+Profiling confirmed valid relationships with Orders, Products, and Sellers.
 
-**Reasoning**
-Business analysis is only reliable when the underlying data has been validated.
+### Decision
 
----
+Maintain foreign key constraints for all three relationships.
 
-## Decision 9 – Adopt a Standard Profiling Workflow
+### Reasoning
 
-Every table should be profiled in the following order:
+The data consistently supports these relationships.
 
-1. Row count
-2. Missing values
-3. Primary key uniqueness
-4. Data format validation
-5. Foreign key validation (if applicable)
-6. Business rule validation
+### Impact
 
-This ensures consistency across all tables.
+Improves database integrity and query reliability.
 
 ---
 
-## Decision 10 – Separate Profiling from Analysis
+## Decision 10 – Do Not Define a Primary Key for `geolocation`
 
-**Decision**
-Treat profiling and business analysis as two independent phases.
+### Context
 
-**Reasoning**
-- Profiling evaluates data quality.
-- Analysis generates business insights.
+The dataset contains exact duplicate rows and ZIP codes are not unique.
 
-Mixing both makes documentation harder to maintain.
+### Decision
 
----
+Leave the table without a primary key.
 
-## Decision 11 – Treat Anomalies as Findings
+### Reasoning
 
-**Decision**
-Do not modify the original dataset when inconsistencies are discovered.
+No column or column combination reliably identifies every record.
 
-**Reasoning**
-- Validate the issue.
-- Document it.
-- Continue analysis using the original data unless cleaning is explicitly required.
+### Impact
+
+The database reflects the structure of the source dataset without introducing artificial uniqueness.
 
 ---
 
-## Decision 12 – Define Completion Criteria for Profiling
+## Decision 11 – Keep Reference Tables Independent
 
-A table is considered fully profiled after validating:
+### Context
 
-- Row count
-- Missing values
-- Primary key uniqueness
-- Foreign key integrity (where applicable)
-- Business rules
-- Important categorical values
-- Timestamp consistency (where applicable)
+The `geolocation` and `product_category_name_translation` tables do not provide reliable keys for enforcing additional foreign key relationships.
 
----
+### Decision
 
-# 3. Workflow Decisions
+Do not create extra foreign keys involving these reference tables.
 
-## Decision 13 – Use PostgreSQL `\copy` for Imports
+### Reasoning
 
-**Context**
-CSV files were initially imported through pgAdmin.
+Enforcing unsupported relationships could introduce incorrect constraints.
 
-**Decision**
-Use PostgreSQL's `\copy` command from the terminal.
+### Impact
 
-**Reasoning**
-- Faster
-- Works directly from VS Code
-- Easier to automate
-- Closer to real-world PostgreSQL workflows
-
-**Impact**
-`\copy` becomes the default import method for this project.
+The schema remains accurate while avoiding invalid dependencies.
 
 ---
 
-# 4. Documentation Standards
+# 4. Project Organization Decisions
 
-## Decision 14 – Organize Profiling Queries Consistently
+## Decision 12 – Organize SQL Scripts by Development Phase
 
-Each profiling section should contain:
+### Context
 
-- Check Number
-- Purpose
-- SQL Query
-- Interpretation (where meaningful)
+As the project expanded, a flat collection of SQL files became difficult to navigate.
+
+### Decision
+
+Group SQL scripts according to the project workflow.
+
+### Structure
+
+- Database creation
+- Table creation
+- Data import
+- Data profiling
+- Exploratory Data Analysis
+- Business insights
+
+### Impact
+
+The repository follows a clear execution order and is easier to maintain.
 
 ---
 
-## Decision 15 – Document Interpretations, Not Just Outputs
+## Decision 13 – Separate Profiling Scripts by Table
 
-Recording only SQL output provides little long-term value.
+### Context
 
-Each important validation should explain:
-- What was checked.
-- What the result means.
-- Whether action is required.
+Maintaining one large profiling script reduced readability.
 
-This makes the documentation useful for future projects and easier to understand when revisiting the work months later.
+### Decision
+
+Create an individual profiling script for each table.
+
+### Reasoning
+
+Smaller scripts are easier to understand, debug, and extend.
+
+### Impact
+
+Improves project organization and simplifies future maintenance.
+
+---
+
+## Decision 14 – Store Import Commands Separately
+
+### Context
+
+Database creation and data loading serve different purposes.
+
+### Decision
+
+Place all import commands in a dedicated SQL file.
+
+### Impact
+
+The database can be recreated using a predictable sequence:
+
+1. Create database
+2. Create tables
+3. Import data
+
+---
+
+# 5. Documentation Decisions
+
+## Decision 15 – Maintain Separate Project Documents
+
+### Context
+
+A single document became difficult to navigate as the project grew.
+
+### Decision
+
+Separate documentation into:
+
+- README
+- Learning Log
+- Decision Log
+- Project Roadmap
+- Database Design
+
+### Reasoning
+
+Each document serves a distinct purpose.
+
+### Impact
+
+Documentation is easier to update, review, and reuse.
+
+---
+
+## Decision 16 – Create an Entity Relationship Diagram
+
+### Context
+
+SQL alone makes it difficult to visualize relationships between tables.
+
+### Decision
+
+Generate an ER Diagram after finalizing the schema.
+
+### Reasoning
+
+The ERD provides a visual representation of the implemented database.
+
+### Impact
+
+Improves documentation quality and helps reviewers understand the schema more quickly.

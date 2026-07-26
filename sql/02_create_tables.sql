@@ -78,3 +78,28 @@ CREATE TABLE reviews (
         FOREIGN KEY (order_id)
         REFERENCES orders(order_id)
 );
+
+CREATE TABLE order_items (
+    order_id TEXT NOT NULL,
+    order_item_id INT NOT NULL,
+    product_id TEXT NOT NULL,
+    seller_id TEXT NOT NULL,
+    shipping_limit_date TIMESTAMP NOT NULL,
+    price NUMERIC(10,2) NOT NULL,
+    freight_value NUMERIC(10,2) NOT NULL,
+
+    CONSTRAINT pk_order_items
+        PRIMARY KEY (order_id, order_item_id),
+
+    CONSTRAINT fk_order_items_orders
+        FOREIGN KEY (order_id)
+        REFERENCES orders(order_id),
+
+    CONSTRAINT fk_order_items_products
+        FOREIGN KEY (product_id)
+        REFERENCES products(product_id),
+
+    CONSTRAINT fk_order_items_sellers
+        FOREIGN KEY (seller_id)
+        REFERENCES sellers(seller_id)
+);
