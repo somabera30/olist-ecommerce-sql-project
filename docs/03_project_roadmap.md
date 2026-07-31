@@ -1,10 +1,9 @@
 # Project Roadmap
 
-## Project
-**Olist E-commerce SQL Project**
+## **Olist E-commerce SQL Project**
 
-**Objective:**
-Build a production-style PostgreSQL database from raw CSV files, validate the data quality through SQL profiling, perform exploratory data analysis (EDA), and generate business insights that demonstrate SQL and analytical skills.
+**Objective:**  
+Build a portfolio-level data analyst project using SQL and PostgreSQL to analyze the Olist e-commerce business, generate actionable insights, and demonstrate technical and business understanding.
 
 ---
 
@@ -17,8 +16,6 @@ Build a production-style PostgreSQL database from raw CSV files, validate the da
 - [x] Install Git
 - [x] Create Git repository
 
----
-
 ## Database Design
 - [x] Understand all datasets
 - [x] Design database schema
@@ -27,14 +24,10 @@ Build a production-style PostgreSQL database from raw CSV files, validate the da
 - [x] Define composite primary keys
 - [x] Define foreign keys
 
----
-
 ## Database Implementation
 - [x] Create database
 - [x] Create all tables
 - [x] Import all CSV datasets
-
----
 
 ## Data Profiling & Validation
 - [x] Customers
@@ -47,63 +40,51 @@ Build a production-style PostgreSQL database from raw CSV files, validate the da
 - [x] Reviews
 - [x] Order Items
 
----
-
 ## Documentation
-- [x] Learning Logs
-- [x] Decision Logs
+- [x] Learning Log
+- [x] Decision Log
 - [x] Database Design
 - [x] ER Diagram
 - [x] Organize project structure
 
 ---
 
-# Phase 2 — Exploratory Data Analysis (Next)
+# Phase 2 — Business Health Assessment ✅ COMPLETED
 
-## Business Exploration
-- [ ] Customer Analysis
-- [ ] Order Analysis
-- [ ] Product Analysis
-- [ ] Seller Analysis
-- [ ] Payment Analysis
-- [ ] Review Analysis
-- [ ] Delivery Analysis
+- [x] Define business health KPIs
+- [x] Calculate and validate KPI results
+- [x] Document key observations
+- [x] Identify the next area for focused analysis
 
 ---
 
-## Business Insights
-- [ ] Revenue Analysis
-- [ ] Sales Trends
-- [ ] Top Products
-- [ ] Top Categories
-- [ ] Seller Performance
-- [ ] Customer Behavior
-- [ ] Delivery Performance
-- [ ] Payment Preferences
-- [ ] Customer Satisfaction
+# Phase 3 — Customer Retention Analysis 🚀 NEXT
+
+**Business Question:**  
+> How can Olist improve customer retention and repeat purchasing?
+
+- [ ] Define retention metrics
+- [ ] Analyze repeat purchasing behavior
+- [ ] Analyze customer retention over time
+- [ ] Investigate factors associated with repeat purchasing
+- [ ] Generate business insights
+- [ ] Develop actionable recommendations
 
 ---
 
-# Phase 3 — Portfolio Preparation
+# Phase 4 — Visualization & Portfolio Preparation
 
-- [ ] Improve README
-- [ ] Export important query results
-- [ ] Create project screenshots
-- [ ] Publish GitHub repository
-- [ ] (Optional) Build Power BI / Tableau dashboard
+- [ ] Build a focused dashboard
+- [ ] Update README
+- [ ] Review project documentation
+- [ ] Add project screenshots
+- [ ] Publish final project to GitHub
 
 ---
 
 # Current Status
 
-## Database Development
-**100% Complete** ✅
-
-## Exploratory Data Analysis
-**Not Started**
-
-## Business Insights
-**Not Started**
-
-## Portfolio
-**In Progress**
+**Database Development:** 100% Complete ✅  
+**Business Health Assessment:** 100% Complete ✅  
+**Customer Retention Analysis:** Not Started 🚀  
+**Visualization & Portfolio:** Not Started

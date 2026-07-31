@@ -1,48 +1,64 @@
 # Olist E-commerce SQL Project
 
-> **From Raw CSV Files to a Production-Ready PostgreSQL Database**
-
-## Project Overview
-
-This project demonstrates the complete process of transforming raw e-commerce CSV datasets into a structured PostgreSQL relational database for analytical purposes.
-
-Rather than starting directly with data analysis, I focused on building a reliable analytical database by applying database design principles, validating data quality, enforcing relationships, and documenting every design decision before performing business analysis.
-
-This project simulates the real-world workflow of an entry-level Data Analyst responsible for preparing high-quality data for analysis.
+> **From Source Datasets to Business Insights Using PostgreSQL**
 
 ---
 
-## Project Highlights
+# Project Overview
 
-- Designed a relational database consisting of **9 interconnected tables**
-- Built the database from scratch using **PostgreSQL**
-- Imported and managed **3+ million records** from raw CSV files
-- Performed comprehensive **data profiling** for every dataset
-- Validated data quality using SQL
-- Implemented **Primary Keys**, **Composite Primary Keys**, and **Foreign Keys**
-- Identified and documented data quality issues and anomalies
-- Created an **Entity Relationship Diagram (ERD)**
-- Documented database design decisions and learning throughout the project
-- Organized the project following a professional SQL development workflow
+This project demonstrates the complete workflow of preparing an e-commerce dataset for business analysis using SQL and PostgreSQL.
+
+Starting with multiple source datasets, I designed a relational database, validated data quality, established meaningful relationships between business entities, and created a Business Health Assessment to understand the overall performance of the Olist marketplace.
+
+Rather than jumping directly into analytical queries, this project emphasizes building a reliable analytical foundation before exploring business questions.
 
 ---
 
 # Why This Project?
 
-Many SQL portfolio projects begin directly with analytical queries.
+Many SQL portfolio projects begin with writing analytical queries.
 
-In this project, I intentionally focused on building the database first because meaningful analysis depends on reliable, well-structured data.
+For this project, I wanted to understand the complete process that comes before analysis.
 
-This project demonstrates the complete workflow of:
+That meant learning how to:
 
-- Understanding unfamiliar datasets
-- Designing a normalized relational database
-- Selecting appropriate data types and constraints
-- Importing raw data into PostgreSQL
-- Validating data quality
-- Maintaining referential integrity
-- Documenting design decisions
-- Preparing data for Exploratory Data Analysis (EDA)
+- understand an unfamiliar dataset,
+- design a relational database,
+- import and validate data,
+- identify data quality issues,
+- define business metrics,
+- and use those metrics to guide further analysis.
+
+This project reflects that learning journey.
+
+---
+
+# Business Objective
+
+The long-term objective of this project is to analyze the Olist marketplace and generate meaningful business recommendations using SQL.
+
+The project follows a structured analytical workflow:
+
+- Build a reliable relational database.
+- Validate the quality of the data.
+- Establish a business baseline through KPI reporting.
+- Identify analytical priorities.
+- Perform focused business analysis.
+
+This approach helps ensure that business insights are supported by trustworthy data and clearly defined metrics.
+
+---
+
+# Project Highlights
+
+- Designed a PostgreSQL relational database using **9 interconnected tables**.
+- Imported and validated more than **3 million records** from the source datasets.
+- Performed comprehensive data profiling for every dataset.
+- Applied primary keys, composite primary keys, and foreign keys where appropriate.
+- Created an Entity Relationship Diagram (ERD).
+- Built a Business Health Assessment using SQL-based KPIs.
+- Documented project decisions, learning, and database design throughout development.
+- Maintained the project using Git and an organized documentation system.
 
 ---
 
@@ -50,7 +66,7 @@ This project demonstrates the complete workflow of:
 
 **Dataset:** Olist Brazilian E-commerce Public Dataset
 
-The dataset contains real-world Brazilian e-commerce data, including information about:
+The dataset contains information about:
 
 - Customers
 - Orders
@@ -58,87 +74,20 @@ The dataset contains real-world Brazilian e-commerce data, including information
 - Products
 - Product Categories
 - Payments
-- Customer Reviews
+- Reviews
 - Geolocation
 
-The final PostgreSQL database consists of **9 relational tables**.
+The PostgreSQL database consists of **9 related tables** designed to support business analysis.
 
 ---
 
-# Tools & Technologies
-
-- PostgreSQL
-- pgAdmin 4
-- Visual Studio Code
-- Git
-- GitHub
-- SQL
-
----
-
-# Skills Demonstrated
-
-## SQL
-
-- DDL (CREATE TABLE)
-- DML
-- Constraints
-- Primary Keys
-- Composite Primary Keys
-- Foreign Keys
-- JOINs
-- Aggregate Functions
-- GROUP BY
-- HAVING
-- Common Table Expressions (CTEs)
-- Data Validation Queries
-
----
-
-## Database Design
-
-- Relational Database Design
-- Schema Design
-- Data Modeling
-- Entity Relationship Diagram (ERD)
-- Referential Integrity
-- Normalization
-
----
-
-## Data Profiling
-
-Performed data quality checks on every table, including:
-
-- Row Count Verification
-- Missing Value Analysis
-- Duplicate Detection
-- Identifier Validation
-- Data Type Validation
-- Business Rule Validation
-- Timestamp Validation
-- Foreign Key Validation
-
----
-
-## Documentation
-
-Maintained project documentation throughout development:
-
-- Learning Logs
-- Decision Logs
-- Project Roadmap
-- Database Design Documentation
-
----
-
-# Project Workflow
+# Analytical Workflow
 
 ```text
-Raw CSV Files
+Source Datasets
         │
         ▼
-Understand Dataset
+Understand the Dataset
         │
         ▼
 Database Design
@@ -153,35 +102,107 @@ Import Data
 Data Profiling & Validation
         │
         ▼
-Database Review
+Business Health Assessment
         │
         ▼
-Entity Relationship Diagram
+Identify Business Questions
         │
         ▼
-Exploratory Data Analysis (EDA)
+Focused Exploratory Data Analysis
         │
         ▼
 Business Insights
+        │
+        ▼
+Recommendations
 ```
+
+---
+
+# Tools & Technologies
+
+- PostgreSQL
+- pgAdmin 4
+- SQL
+- Git
+- GitHub
+- Visual Studio Code
+
+---
+
+# Skills Demonstrated
+
+## SQL
+
+- DDL (CREATE TABLE)
+- DML
+- JOINs
+- Aggregate Functions
+- GROUP BY
+- HAVING
+- Common Table Expressions (CTEs)
+- Data Validation Queries
+
+---
+
+## Database Design
+
+- Relational Database Design
+- Schema Design
+- Entity Relationships
+- Constraints
+- Primary Keys
+- Composite Primary Keys
+- Foreign Keys
+
+---
+
+## Data Quality
+
+- Data Profiling
+- Missing Value Analysis
+- Duplicate Detection
+- Business Rule Validation
+- Timestamp Validation
+- Cross-table Validation
+
+---
+
+## Business Analysis
+
+- KPI Definition
+- Business Health Assessment
+- Business Entity Identification
+- Business Question Framing
+- Analytical Workflow
+
+---
+
+## Documentation
+
+- Learning Log
+- Decision Log
+- Database Design Documentation
+- Project Roadmap
+- Business Health Report
 
 ---
 
 # Database Schema
 
-The project contains **9 relational tables**.
+The project contains nine related tables representing different parts of the Olist marketplace.
 
 | Table | Description |
 |--------|-------------|
 | customers | Customer information |
 | orders | Order details |
 | sellers | Seller information |
-| products | Product attributes |
-| product_category_name_translation | Portuguese-to-English category mapping |
-| geolocation | Brazilian ZIP code geolocation data |
+| products | Product information |
+| product_category_name_translation | Category translation |
+| geolocation | ZIP code geolocation data |
 | payments | Payment information |
 | reviews | Customer reviews |
-| order_items | Individual products within each order |
+| order_items | Products within each order |
 
 ---
 
@@ -189,7 +210,9 @@ The project contains **9 relational tables**.
 
 The following diagram represents the implemented PostgreSQL database schema.
 
+```markdown
 ![ER Diagram](images/ER_Diagram.png)
+```
 
 ---
 
@@ -199,159 +222,99 @@ The following diagram represents the implemented PostgreSQL database schema.
 Olist_Ecommerce_SQL_Project/
 │
 ├── data/
-│
 ├── docs/
-│   ├── 01_learning_log.md
-│   ├── 02_decision_log.md
-│   ├── 03_project_roadmap.md
-│   └── 04_database_design.md
-│
 ├── images/
-│   └── ER_Diagram.png
-│
 ├── output/
-│
 ├── sql/
-│   ├── 01_create_database.sql
-│   ├── 02_create_tables.sql
-│   ├── 03_import_data.sql
-│   ├── 04_01_customers_profiling.sql
-│   ├── 04_02_orders_profiling.sql
-│   ├── 04_03_sellers_profiling.sql
-│   ├── 04_04_products_profiling.sql
-│   ├── 04_05_product_category_translation_profiling.sql
-│   ├── 04_06_geolocation_profiling.sql
-│   ├── 04_07_payments_profiling.sql
-│   ├── 04_08_reviews_profiling.sql
-│   ├── 04_09_order_items_profiling.sql
-│   ├── 05_exploratory_data_analysis.sql
-│   └── 06_business_insights.sql
-│
 ├── README.md
 └── .gitignore
 ```
 
 ---
 
-# Key Database Design Decisions
-
-- Used **composite primary keys** where a single column could not uniquely identify a record.
-- Maintained referential integrity using foreign keys wherever appropriate.
-- Kept the **geolocation** table independent because ZIP code prefixes are not unique.
-- Treated **product_category_name_translation** as a lookup table without enforcing a foreign key.
-- Recognized that **customer_id** identifies a customer record associated with a single order, while **customer_unique_id** identifies the actual customer across multiple purchases.
-
----
-
-# How to Run
-
-### 1. Clone the repository
-
-```bash
-git clone <repository-url>
-```
-
-### 2. Open PostgreSQL
-
-Create a new database.
-
-### 3. Execute the SQL scripts in the following order
-
-```text
-01_create_database.sql
-
-02_create_tables.sql
-
-03_import_data.sql
-```
-
-### 4. Run the profiling scripts
-
-Execute each profiling script to validate the imported data.
-
-### 5. Perform analysis
-
-Run:
-
-- 05_exploratory_data_analysis.sql
-- 06_business_insights.sql
-
----
-
 # Documentation
 
-Detailed project documentation is available in the **docs** folder.
+The project documentation explains both the implementation and the thinking behind the project.
 
-- Learning Log
-- Decision Log
-- Project Roadmap
+| Document | Purpose |
+|----------|---------|
+| Learning Log | Concepts and analytical thinking developed during the project |
+| Decision Log | Important project decisions and their reasoning |
+| Database Design | Schema design, relationships and ER Diagram |
+| Business Health Report | KPI-based assessment of business performance |
+| Project Roadmap | Current progress and upcoming work |
+
+---
+
+# Current Status
+
+## ✅ Phase 1 — Database Development
+
+Completed:
+
 - Database Design
+- Data Import
+- Data Profiling
+- Data Validation
+- Entity Relationship Diagram
+- Documentation
 
 ---
 
-# Current Project Status
+## ✅ Phase 2 — Business Health Assessment
 
-## Phase 1 — Database Development
+Completed:
 
-- ✅ Database Design
-- ✅ Schema Creation
-- ✅ Data Import
-- ✅ Data Profiling
-- ✅ Data Validation
-- ✅ Entity Relationship Diagram
-- ✅ Project Documentation
+- KPI Definition
+- Business Health Report
+- Initial Business Observations
+- Identification of the next analytical focus
 
 ---
 
-## Phase 2 — Exploratory Data Analysis
+## 🚀 Phase 3 — Customer Retention Analysis
 
-**Coming Next**
+Next phase:
 
-The next stage of the project will explore business questions related to:
-
-- Customer Behavior
-- Sales Performance
-- Product Performance
-- Seller Performance
-- Payment Trends
-- Delivery Performance
-- Customer Satisfaction
+- Define customer retention metrics.
+- Analyze repeat purchasing behaviour.
+- Identify factors influencing customer retention.
+- Develop business recommendations.
 
 ---
 
-# Future Improvements
+# Future Work
 
-- Perform advanced SQL-based Exploratory Data Analysis (EDA)
-- Generate business insights and recommendations
-- Build an interactive Power BI or Tableau dashboard
-- Optimize analytical SQL queries
-- Create reusable SQL views for reporting
+- Complete Customer Retention Analysis.
+- Perform additional business analyses.
+- Build an interactive Power BI dashboard.
+- Publish the completed project portfolio.
 
 ---
 
 # Key Learning Outcomes
 
-Through this project, I strengthened my understanding of:
+Through this project, I developed a deeper understanding of:
 
-- Relational Database Design
-- PostgreSQL
-- SQL Data Definition Language (DDL)
-- Data Modeling
-- Data Profiling
-- Data Validation
-- Referential Integrity
-- Database Documentation
-- Structuring a professional analytics project
+- Relational database design
+- SQL with PostgreSQL
+- Data profiling and validation
+- Business-oriented data analysis
+- KPI definition
+- Documentation and project organization
+- Structuring an end-to-end SQL project
 
 ---
 
 # About Me
 
-I'm a B.Tech graduate aspiring to build a career in Data Analytics. I enjoy solving business problems through data and continuously improving my skills by working on end-to-end projects with real-world datasets.
+I'm a B.Tech graduate building a career in Data Analytics.
 
-Currently, I'm strengthening my expertise in SQL, PostgreSQL, Excel, and Power BI while building a portfolio that demonstrates database design, data validation, and analytical problem-solving.
+I enjoy understanding business problems through data and continuously improving my skills by working on practical projects with real-world datasets.
 
-I'm actively seeking entry-level opportunities in **Data Analytics, Business Intelligence, MIS Reporting, and Operations Analytics**.
+Currently, I'm strengthening my skills in SQL, PostgreSQL, Excel, and Power BI while building a portfolio that demonstrates database design, data validation, and business analysis.
+
+I'm actively seeking entry-level opportunities in Data Analytics, Business Intelligence, MIS Reporting, and Operations Analytics.
 
 ---
 

@@ -8,8 +8,8 @@
 -- Purpose: Verify all rows were imported successfully.
 SELECT COUNT(*)
 FROM reviews;
--- Expected: 99224 rows
--- Result: 99224 rows imported successfully.
+-- Expected: 99,224 rows
+-- Result: 99,224 rows imported successfully.
 
 
 -- Check 2: Missing Values
