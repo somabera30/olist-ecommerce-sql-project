@@ -210,9 +210,9 @@ The project contains nine related tables representing different parts of the Oli
 
 The following diagram represents the implemented PostgreSQL database schema.
 
-```markdown
-![ER Diagram](images/ER_Diagram.png)
-```
+
+![ER Diagram](images/ER_diagram.png)
+
 
 ---
 
