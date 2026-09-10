@@ -58,13 +58,21 @@ Build a portfolio-level data analyst project using SQL and PostgreSQL to analyze
 
 ---
 
-# Phase 3 — Customer Retention Analysis 🚀 NEXT
+# Phase 3 — Customer Retention Analysis 🚀 IN PROGRESS
 
 **Business Question:**  
 > How can Olist improve customer retention and repeat purchasing?
 
-- [ ] Define retention metrics
-- [ ] Analyze repeat purchasing behavior
+## Repeat Purchasing Behavior
+
+- [x] Define repeat customer
+- [x] Calculate Repeat Customer Rate
+- [x] Analyze Time to Second Purchase
+- [x] Analyze Time to Second Purchase distribution
+- [ ] Analyze repeat purchasing after the second purchase
+
+## Further Analysis
+
 - [ ] Analyze customer retention over time
 - [ ] Investigate factors associated with repeat purchasing
 - [ ] Generate business insights
@@ -86,5 +94,5 @@ Build a portfolio-level data analyst project using SQL and PostgreSQL to analyze
 
 **Database Development:** 100% Complete ✅  
 **Business Health Assessment:** 100% Complete ✅  
-**Customer Retention Analysis:** Not Started 🚀  
+**Customer Retention Analysis:** In Progress 🚀  
 **Visualization & Portfolio:** Not Started

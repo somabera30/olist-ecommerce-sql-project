@@ -118,8 +118,8 @@ LEFT JOIN orders o
 ON oi.order_id = o.order_id
 WHERE o.order_id IS NULL;
 -- Interpretation:
--- Every review record is associated with an existing order.
--- No orphan review records were found.
+-- Every order_item record is associated with an existing order.
+-- No orphan order_items records were found.
 
 
 -- Check 12: Foreign Key Validation
@@ -130,8 +130,8 @@ LEFT JOIN products p
 ON oi.product_id = p.product_id
 WHERE p.product_id IS NULL;
 -- Interpretation:
--- Every review record is associated with an existing order.
--- No orphan review records were found.
+-- Every product_id is associated with an existing product.
+-- No orphan product_id records were found.
 
 
 -- Check 13: Foreign Key Validation
@@ -142,5 +142,5 @@ LEFT JOIN sellers s
 ON oi.seller_id = s.seller_id
 WHERE s.seller_id IS NULL;
 -- Interpretation:
--- Every review record is associated with an existing order.
--- No orphan review records were found.
+-- Every seller_id record is associated with an existing seller.
+-- No orphan seller_id records were found.
