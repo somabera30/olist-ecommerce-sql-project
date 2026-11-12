@@ -102,7 +102,7 @@ Each KPI includes:
 
 **File**
 
-`06_exploratory_data_analysis.sql`
+`06_customer_retention_analysis.sql`
 
 This phase investigates specific business questions identified during the Business Health Assessment.
 
@@ -114,9 +114,11 @@ The analysis focuses on understanding patterns, relationships, and potential bus
 
 **File**
 
-`07_business_insights.sql`
+`06_business_insights.md`
 
-This script summarizes the findings from the exploratory analysis and translates them into business insights and actionable recommendations.
+[Business Insights: Customer Retention](docs/06_business_insights.md)
+
+This document summarizes the findings from the exploratory analysis and translates them into business insights and actionable recommendations.
 
 ---
 

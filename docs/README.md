@@ -15,6 +15,7 @@ These documents complement the SQL scripts by explaining the project's design, d
 | `03_project_roadmap.md` | High-level project phases, current progress, and upcoming work. |
 | `04_database_design.md` | Database schema, table relationships, constraints, and Entity Relationship Diagram (ERD). |
 | `05_business_health_report.md` | Baseline assessment of the Olist marketplace using business KPIs and key observations. |
+| `06_business_insights.md` |The SQL analysis is translated into business findings, interpretations, and recommendations in the Final Business Insights.|
 
 ---
 
@@ -27,6 +28,7 @@ Each document serves a distinct purpose.
 - **Project Roadmap** shows **where the project is heading**.
 - **Database Design** documents **how the database was designed**.
 - **Business Health Report** establishes **a baseline understanding of business performance before deeper analysis**.
+- **Business  insights** explores **Olist's customer retention challenges and identifies opportunities to improve repeat purchasing.**.
 
 Keeping these documents separate reduces duplication and makes the project easier to understand, maintain, and extend.
 

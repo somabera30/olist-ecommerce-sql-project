@@ -1,33 +1,27 @@
-# Olist E-commerce SQL Project
-# Learning Log
+# Data Analyst Learning Knowledge Base
 
-> ## Purpose
+> **Purpose:** A compact reference for lessons, analytical principles, and reusable practices learned while building data projects.
 >
-> This document is a reusable knowledge base created while building the Olist E-commerce SQL project.
->
-> Rather than recording daily activities, it captures the concepts, workflows, design principles, and analytical thinking developed throughout the project.
->
-> The objective is to:
->
-> - build a reusable reference for future SQL projects,
-> - preserve important technical and business concepts,
-> - document professional development beyond SQL syntax,
-> - restore project context after long breaks,
-> - continuously improve how analytical problems are approached.
+> This is **not a daily diary** and not a complete record of the Olist project.  
+> Project-specific decisions belong in `02_decision_log.md`; project findings belong in the final reports.
 
 ---
 
 # Table of Contents
 
-1. Git & Project Setup
-2. Database Design
-3. PostgreSQL & Data Import
-4. Data Profiling
-5. Relational Database Modeling
-6. Business Analysis Foundations
-7. Documentation & Project Organization
-8. Business Mindset
-9. Project Evolution
+1. [Git & Project Setup](#1-git--project-setup)
+2. [Database Design](#2-database-design)
+3. [PostgreSQL & Data Import](#3-postgresql--data-import)
+4. [Data Profiling](#4-data-profiling)
+5. [Relational Database Modeling](#5-relational-database-modeling)
+6. [Business Analysis Foundations](#6-business-analysis-foundations)
+7. [Business Mindset](#7-business-mindset)
+8. [Documentation & Project Organization](#8-documentation--project-organization)
+9. [Project Evolution](#9-project-evolution)
+10. [Customer Retention Analysis](#10-customer-retention-analysis)
+11. [From Analysis to Recommendations](#11-from-analysis-to-recommendations)
+12. [Analytical Discipline & Limitations](#12-analytical-discipline--limitations)
+13. [Quick Reference](#13-quick-reference)
 
 ---
 
@@ -35,92 +29,52 @@
 
 ## Purpose
 
-A project should be easy to reproduce, maintain and understand before writing the first SQL query.
+Use version control to protect work, track meaningful changes, and keep the project reproducible.
 
-Good project organisation reduces friction throughout development.
+## Core Git Concepts
 
----
+| Command | Purpose |
+|---|---|
+| `git init` | Initialize a repository |
+| `git status` | Check current state |
+| `git add` | Stage changes |
+| `git commit` | Save a version locally |
+| `git push` | Send commits to GitHub |
+| `git log` | Review commit history |
 
-## Project Structure
+### Important distinction
 
-The repository was organised into separate areas for:
+**Commit ≠ push**
 
-- SQL scripts
-- Raw datasets
-- Documentation
-- Database design
+- Commit saves a version in the local Git repository.
+- Push sends local commits to the remote GitHub repository.
 
-Separating these responsibilities keeps the project maintainable as it grows.
+This makes it possible to save work locally without immediately changing the public repository.
 
----
+## `.gitignore`
 
-## Technology Stack
+Use `.gitignore` to prevent files that should not be version-controlled from entering the repository.
 
-- PostgreSQL
-- pgAdmin 4
-- Visual Studio Code
-- Git
+Typical examples:
 
-Each tool serves a distinct purpose:
+- raw/large datasets
+- credentials
+- local configuration
+- generated files
+- temporary files
 
-| Tool | Purpose |
-|-------|----------|
-| PostgreSQL | Database Management System |
-| pgAdmin | Database administration |
-| VS Code | SQL and documentation |
-| Git | Version control |
+## Project Organization
 
----
+Keep calculations separate from explanation.
 
-## Git Fundamentals
-
-### Commands Used
-
-```bash
-git init
-git status
-git add .
-git commit -m "message"
-git diff
-git restore
+```text
+sql/     → calculations and analysis
+docs/    → findings, decisions and documentation
+images/  → diagrams/visuals
+README   → project overview
 ```
 
-### Key Learnings
-
-- Every meaningful milestone should have its own commit.
-- Commit messages should describe **what changed**, not when it changed.
-- Git protects project history and makes experimentation safer.
-- Documentation and SQL should evolve together.
-
----
-
-## README
-
-The README acts as the project's front page.
-
-A good README explains:
-
-- project objective
-- dataset
-- technology stack
-- folder structure
-
-Someone should understand the project without opening any SQL files.
-
----
-
-## .gitignore
-
-Version control should include only files that belong to the project.
-
-Typical exclusions:
-
-- cache files
-- temporary files
-- IDE settings
-- operating-system generated files
-
-Keeping the repository clean improves collaboration and readability.
+A clean structure makes the project easier to review and maintain.
 
 ---
 
@@ -128,235 +82,77 @@ Keeping the repository clean improves collaboration and readability.
 
 ## Purpose
 
-Database design should represent how a business operates.
-
-A well-designed schema improves data integrity, simplifies analysis, and creates meaningful relationships between business entities.
-
----
+A database should represent the business accurately before analysis begins.
 
 ## Key Principle
 
-> Design the database around the business—not around the dataset.
+> Design around business entities and relationships, not just around columns in a CSV file.
 
----
+## Think in Entities
 
-## Relational Thinking
+Examples from the Olist project:
 
-Instead of treating the dataset as one spreadsheet, think in terms of business entities.
+- customers
+- orders
+- order items
+- products
+- sellers
+- payments
+- reviews
 
-Examples:
-
-- Customers
-- Orders
-- Products
-- Sellers
-- Payments
-- Reviews
-- Order Items
-
-Each table answers a different business question.
-
-This approach:
-
-- reduces redundancy
-- improves consistency
-- simplifies maintenance
-- enables scalable analysis
-
----
-
-## Understand the Business Before Creating Tables
-
-Before designing a table, answer:
-
-- What does one row represent?
-- What does each column represent?
-- Is this transactional, core or reference data?
-- How does this entity relate to others?
-
-Business meaning should guide schema design.
-
----
-
-## Choosing Data Types
-
-Data types should reflect business meaning.
-
-General guidelines:
-
-| Data | Recommended Type |
-|------|------------------|
-|  IDs | TEXT |
-| ZIP Codes | VARCHAR / TEXT |
-| Dates & Time | TIMESTAMP |
-| State Codes | CHAR(2) |
-| Measurements | Numeric Types |
-
-Example:
-
-Although ZIP codes contain digits, they are identifiers—not quantities.
-
----
+Each table should have a clear meaning and grain.
 
 ## Primary Keys
 
-A Primary Key should:
+A primary key identifies a row uniquely.
 
-- uniquely identify a record
-- remain stable
-- never contain NULL values
-
-Some datasets require composite keys.
-
-Example:
-
-```
-(order_id, order_item_id)
-```
-
-because `order_item_id` restarts from 1 within each order.
-
----
+Before choosing one, verify that the candidate is actually unique.
 
 ## Foreign Keys
 
-Identify foreign key by asking:
+A foreign key connects a record to another business entity.
 
-> Can this record exist without its parent?
+Example:
 
-If the answer is **No**, a foreign key is usually appropriate.
-
-Examples:
-
-- Orders → Customers
-- Order Items → Orders
-- Order Items → Products
-- Order Items → Sellers
-
-Foreign keys preserve business relationships and prevent orphan records.
-
----
-
-## Parent–Child Relationships
-
-Create tables according to dependency order.
-
-Sequence:
-
-```
-Parent Tables
-
-↓
-
-Child Tables
+```text
+customers
+customer_id
+    ↓
+orders
+customer_id
 ```
 
-This simplifies imports and avoids foreign key dependency issues.
+Foreign keys help represent relationships and prevent invalid references when enforced.
 
----
+## Data Types
 
-## Types of Tables
+Choose types based on the meaning and expected values of the data.
 
-Understanding the role of each table helps determine how it should be validated.
+Consider:
 
-### Transaction Tables
+- text length
+- numeric precision
+- dates/timestamps
+- nullable fields
+- identifiers that may contain leading zeros
 
-Store business events.
-
-Examples:
-
-- Orders
-- Payments
-- Reviews
-- Order Items
-
----
-
-### Core Tables
-
-Store relatively stable business entities.
-
-Examples:
-
-- Customers
-- Sellers
-- Products
-
----
-
-### Reference Tables
-
-Support other datasets.
-
-Examples:
-
-- Geolocation
-- Product Category Translation
-
-Reference tables often require different validation and constraint strategies.
-
----
+Do not change source data simply to make it look cleaner without understanding its meaning.
 
 ## NULL Handling
 
-NULL values should be determined by business rules.
+`NULL` means missing/unknown, not automatically zero or an empty string.
 
-> Can this business event legitimately never happen?
+Always ask:
 
-Examples:
-
-| Column | NULL? | Reason |
-|---------|-------|--------|
-| Purchase Timestamp | No | Purchase always occurs |
-| Delivery Timestamp | Yes | Order may never be delivered |
-| Review Comment | Yes | Customer may only provide a rating |
-
-Business meaning should always take precedence over assumptions.
-
----
-
-## Evidence-Based Schema Design
-
-Avoid strengthening constraints based only on sample observations.
-
-Workflow:
-
-```
-Understand the Business
-
-↓
-
-Design Initial Schema
-
-↓
-
-Import Data
-
-↓
-
-Profile the Entire Dataset
-
-↓
-
-Strengthen Constraints
-```
-
-Constraints should be supported by evidence rather than assumptions.
-
----
+> What does a missing value mean in this business context?
 
 ## Schema Evolution
 
-A database schema should evolve as understanding improves.
+Initial schema decisions may change after profiling.
 
-After profiling, it may be appropriate to:
+That is normal.
 
-- strengthen constraints
-- relax constraints
-- refine data types
-- improve relationships
-
-Schema design is iterative, not one-time work.
+A good schema is evidence-driven and can be refined when the data reveals something previously unknown.
 
 ---
 
@@ -364,88 +160,58 @@ Schema design is iterative, not one-time work.
 
 ## Purpose
 
-Importing data is more than loading CSV files.
-
-A reliable import workflow establishes confidence in the database before analysis begins.
-
----
+Import the data correctly and verify it before trusting it.
 
 ## Import Workflow
 
-Recommended sequence:
+```text
+Create table
+    ↓
+Import data
+    ↓
+Validate row count
+    ↓
+Check encoding / errors
+    ↓
+Profile columns
+```
 
-1. Understand the dataset.
-2. Design the schema.
-3. Create parent tables.
-4. Import parent tables.
-5. Create child tables.
-6. Import child tables.
-7. Validate imports.
-8. Begin profiling.
+## `COPY` vs `\copy`
 
-Following dependency order reduces errors and improves reproducibility.
+- `COPY` runs on the PostgreSQL server and requires server-side file access.
+- `\copy` runs through the `psql` client and is often easier for local files.
 
----
+## CSV Import
 
-## COPY vs \copy
+Check:
 
-Large datasets should be imported using PostgreSQL's bulk-loading tools.
-
-### COPY
-
-- Runs on the PostgreSQL server.
-- Reads server-side files.
-
-### \copy
-
-- Runs from the PostgreSQL client.
-- Reads local files.
-- Better suited for local development.
-
-For this project, **\copy** became the standard workflow.
-
----
-
-## CSV Import Principles
-
-Before importing a dataset, verify:
-
-- column order
 - delimiter
-- header row
-- character encoding
+- header
+- encoding
+- quoting
+- column order
+- data types
 
-Small import settings can have a significant impact on data quality.
-
----
+An import that completes successfully is not necessarily a correct import.
 
 ## Character Encoding
 
-One dataset failed to import despite correct SQL syntax.
+Encoding errors can prevent successful imports or corrupt text.
 
-Root cause:
-
-- Reviews dataset encoded as **LATIN1 (WIN1252)** instead of UTF-8.
-
-Lesson:
-
-Import failures are not always SQL problems.
-
-Sometimes the data source itself must be understood before troubleshooting.
-
----
+When text contains accented or non-ASCII characters, verify the source encoding rather than assuming UTF-8.
 
 ## Validate Every Import
 
-Never assume an import succeeded simply because no error was reported.
+At minimum:
 
-Always verify:
+- compare expected and actual row counts
+- inspect representative rows
+- check NULLs
+- check identifiers
+- check dates/timestamps
+- check relationships
 
-- row count
-- missing records
-- matching the expected schema
-
-Profiling should only begin after the imported data has been validated.
+> **Import success is not data validation.**
 
 ---
 
@@ -453,184 +219,99 @@ Profiling should only begin after the imported data has been validated.
 
 ## Purpose
 
-Data profiling evaluates whether a dataset is reliable enough for business analysis.
-
-Its objective is not to answer business questions, but to understand the quality, completeness, and integrity of the data before drawing conclusions.
-
----
+Profiling establishes whether the data is trustworthy enough for analysis.
 
 ## Standard Profiling Workflow
 
-Every table was profiled using a consistent workflow.
+```text
+Row count
+→ Missing values
+→ Identifier uniqueness
+→ Duplicates
+→ Foreign-key relationships
+→ Date/timestamp validity
+→ Business-rule checks
+→ Cross-table validation
+→ Summary statistics
+```
 
-1. Row count validation
-2. Missing value analysis
-3. Primary key validation
-4. Duplicate detection
-5. Identifier validation
-6. Data format validation
-7. Business rule validation
-8. Foreign key validation
-9. Timestamp validation
-10. Summary statistics
+## Row Counts
 
-Using the same workflow across all tables creates consistency and improves reproducibility.
+Confirm that imported row counts match expectations.
 
----
+Unexpected differences should be investigated before analysis.
 
-## Row Count Validation
+## Missing Values
 
-The first validation confirms that the imported data matches the source dataset.
+Do not only count NULLs.
 
-Row counts should always be verified before deeper analysis.
+Ask:
 
----
+> Is this field allowed to be missing?
 
-## Missing Value Analysis
-
-NULL values should be interpreted using business context.
-
-Examples:
-
-| Observation | Interpretation |
-|-------------|----------------|
-| Missing review comments | Customer submitted only a rating |
-| Missing delivery timestamp | Order may never have been delivered |
-| Missing product attributes | Product information may be incomplete |
-
-The objective is to distinguish expected missing information from genuine data quality issues.
-
----
+A missing delivery date for an undelivered order may be expected; the same missing value for a completed delivery may require investigation.
 
 ## Identifier Validation
 
-Business identifiers should be validated for:
+Check whether identifiers are:
 
-- uniqueness
-- consistency
-- formatting
-- expected length
+- unique when expected
+- duplicated when expected
+- missing
+- correctly related to other tables
 
-**A business identifier is not automatically suitable as a database primary key.**
+## Duplicates
 
-Examples encountered during the project:
+Distinguish between:
 
-- `review_id`
-- `customer_unique_id`
+- duplicate identifiers
+- exact duplicate rows
+- legitimate repeated business values
 
-Business meaning determines whether uniqueness should be enforced.
+Not every repeated value is a data-quality problem.
 
----
+## Foreign-Key Validation
 
-## Duplicate Validation
+Look for child records that do not have a corresponding parent.
 
-Not every duplicate represents poor data quality.
+This can reveal:
 
-Different duplicate types require different interpretations.
-
-### Duplicate Identifiers
-
-May represent legitimate business behaviour.
-
-### Exact Duplicate Rows
-
-Require investigation because every column contains identical information.
-
-Understanding the business process is essential before classifying duplicates as errors.
-
----
-
-## Foreign Key Validation
-
-Relationships between related tables should always be validated.
-
-Typical checks include:
-
-- every child record references an existing parent
-- no orphan records exist
-- expected relationships remain intact
-
-Referential integrity should be confirmed.
-
----
+- missing records
+- import problems
+- incomplete relationships
+- legitimate exceptions
 
 ## Timestamp Validation
 
-Business events should follow a logical sequence.
+Check for:
+
+- NULL timestamps
+- impossible sequences
+- negative durations
+- unexpected ordering between business events
+
+Unexpected timestamps should be investigated, not automatically deleted.
+
+## Business-Rule Validation
+
+Use business knowledge as a validation tool.
 
 Examples:
 
-- Purchase → Approval
-- Approval → Shipment
-- Shipment → Delivery
-- Review Creation → Review Response
-
-Timeline validation helps detect inconsistent records without assuming they are incorrect.
-
----
-
-## Business Rule Validation
-
-Many validations rely on business logic rather than SQL syntax.
-
-Examples:
-
-- Latitude between -90 and 90
-- Longitude between -180 and 180
-- Product dimensions greater than zero
-- Positive freight values
-
----
-
-## Cross-Table Validation
-
-Cross-table checks reveal inconsistencies that cannot be detected within a single table.
-
-Examples:
-
-- Orders without customers
-- Reviews without orders
-- Customers without matching geolocation
-- Sellers without matching geolocation
-
-Cross-table validation increases confidence in the relational database.
-
----
-
-## Summary Statistics
-
-Simple descriptive statistics help understand numerical data before analysis.
-
-Useful measures include:
-
-- minimum
-- maximum
-- average
-- frequency distribution
-
-Unexpected values should be documented rather than immediately corrected.
-
----
+- latitude must be between -90 and 90
+- longitude must be between -180 and 180
+- delivery should not occur before purchase
+- quantities/prices should follow reasonable business rules
 
 ## Observations Before Explanations
 
-A profiling report should describe **what exists**, not **why it exists**.
+Profiling tells you **what is present**.
 
-Example:
+It does not automatically tell you **why it happened**.
 
-Observation
+Keep these separate:
 
-> Four products have zero recorded weight.
-
-Possible Interpretation
-
-> Product information may be incomplete.
-
-Avoid concluding:
-
-> Sellers entered incorrect weights.
-
-Business explanations belong to exploratory analysis, not profiling.
+> Observation → possible explanation → evidence needed
 
 ---
 
@@ -638,138 +319,96 @@ Business explanations belong to exploratory analysis, not profiling.
 
 ## Purpose
 
-A relational database models business relationships rather than isolated tables.
-
-Understanding those relationships is essential for designing schemas, writing joins, and interpreting results correctly.
-
----
+Understand how tables relate before joining them.
 
 ## Key Principle
 
-> SQL joins should follow business relationships—not just matching column names.
-
----
+> SQL joins should follow business relationships, not merely matching column names.
 
 ## Relationship Cardinality
 
-Common relationships in the project include:
+Common relationships:
 
-| Relationship                        | Cardinality       |
-| ----------------------------------- | ----------------- |
-| One customer → Many orders          | One-to-Many (1:M) |
-| One order → Many order items        | One-to-Many (1:M) |
-| One product → Many order items      | One-to-Many (1:M) |
-| One order → One payment (sometimes) | One-to-One (1:1)  |
+| Relationship | Cardinality |
+|---|---|
+| Customer → Orders | 1:M |
+| Order → Order Items | 1:M |
+| Product → Order Items | 1:M |
 
-Recognising cardinality helps prevent incorrect joins and duplicated results.
-
----
+Understanding cardinality prevents row multiplication.
 
 ## Composite Keys
 
-Some business entities require more than one column for uniqueness.
+Sometimes uniqueness requires more than one column.
 
 Example:
 
-```
+```text
 (order_id, order_item_id)
 ```
 
-The composite key reflects how order items are numbered within each order.
+The correct key depends on the business grain.
 
----
+## One-to-Many Join Problem
 
-## Reference Datasets
-
-Reference tables provide supporting information rather than recording business events.
-
-Examples:
-
-- Geolocation
-- Product Category Translation
-
-These datasets often require different validation and constraint strategies.
-
----
-
-## One-to-Many Join Problems
-
-Joining tables without considering relationship cardinality can multiply rows unexpectedly.
+A join can multiply rows when the parent has multiple matching child records.
 
 Example:
 
-**Joining raw geolocation data directly with customer records duplicated rows because multiple geolocation records shared the same ZIP code having multiple values of longitudes and latitudes.**
+```text
+customer
+   ↓
+many orders
+```
 
-Understanding relationship cardinality is essential before performing analysis.
-
----
+If a query joins another one-to-many table without controlling the grain, counts can become inflated.
 
 ## Prepare Data Before Joining
 
-Source datasets are not always analysis-ready.
+Useful techniques:
 
-Intermediate datasets may be required using:
+- `DISTINCT`
+- aggregation
+- CTEs
+- derived tables
+- pre-aggregated datasets
 
-- DISTINCT
-- Aggregation
-- Common Table Expressions (CTEs)
+Do not assume a join is safe just because the columns match.
 
-Preparing data before joining improves analytical accuracy.
+## Choose the Correct Business Entity
 
----
+Always ask what you are counting.
 
-## Choosing the Correct Business Entity
+| Question | Entity |
+|---|---|
+| Number of orders | `order_id` |
+| Number of customers | `customer_unique_id` |
+| Number of items | order-item rows |
+| Number of sellers | `seller_id` |
 
-The same metric can produce different answers depending on **what is being counted**.
+## Understand Row Grain
 
-Examples:
+Before aggregating, complete this sentence:
 
-| Business Question | Correct Entity |
-|-------------------|----------------|
-| Number of Orders | `orders` |
-| Number of Customers | `customer_unique_id` |
-| Number of Items Sold | `order_items` |
-| Active Sellers | `seller_id` |
+> **One row represents ______.**
 
-Always identify the business entity before writing aggregation queries.
+If you cannot answer it, the query is not ready.
 
----
-
-## Understanding Row Granularity
-
-Every table has a natural level of detail (grain).
-
-Examples:
-
-| Table | One Row Represents |
-|--------|--------------------|
-| Orders | One order |
-| Order Items | One purchased item |
-| Customers | One customer account |
-
-Knowing the grain prevents incorrect joins, aggregations, and KPI definitions.
-
----
-
-## COUNT vs COUNT(DISTINCT)
-
-Choosing the correct aggregation depends on the business question.
-
-Examples:
+## `COUNT` vs `COUNT(DISTINCT)`
 
 ```sql
 COUNT(order_id)
 ```
 
-Counts orders.
+and
 
 ```sql
 COUNT(DISTINCT customer_unique_id)
 ```
 
-Counts unique customers.
+answer different business questions.
 
-The SQL function should be chosen only after defining the business metric.
+The aggregation should follow the metric definition, not the other way around.
 
 ---
 
@@ -777,124 +416,75 @@ The SQL function should be chosen only after defining the business metric.
 
 ## Purpose
 
-Once the database has been validated, the focus shifts from **building the database** to **understanding the business**.
-
-Business analysis begins by defining meaningful questions before writing SQL.
-
----
+Move from database understanding to business understanding.
 
 ## Key Principle
 
 > Business questions drive SQL—not the other way around.
 
----
+## Start With a Business Health Baseline
 
-## Business Health Report
+Before deep investigation, establish a small set of KPIs such as:
 
-Rather than exploring every table randomly, begin with a Business Health Report.
+- revenue
+- orders
+- customers
+- sellers
+- items
+- delivery performance
+- customer experience
 
-Its purpose is to establish a baseline understanding of the business.
+The baseline gives context for later analysis.
 
-Typical KPI categories include:
+## Define KPIs Before Writing SQL
 
-- Revenue
-- Orders
-- Customers
-- Sellers
-- Items Sold
-- Delivery Performance
-- Customer Experience
+For every KPI, define:
 
-A Business Health Report provides context before detailed exploration begins.
+1. **Business entity**
+2. **Scope**
+3. **Time period**
+4. **Calculation**
+5. **Unit**
+6. **Exclusions**
 
----
+Example:
 
-## Define KPI Meaning Before Writing SQL
+> “Customer” can mean customer account, unique person, buyer, or another business entity.
 
-Every KPI should be defined in business terms before it is calculated.
-
-Examples:
-
-| KPI | Business Definition |
-|-----|----------------------|
-| Revenue | Product sales from delivered orders (excluding freight) |
-| Customers | Distinct `customer_unique_id` |
-| Active Sellers | Sellers with at least one delivered order |
-| Delivery Time | Purchase to customer delivery |
-
-The same dataset can support multiple valid definitions.
-
-Choosing the correct definition is a business decision—not a SQL decision.
-
----
+The same dataset can produce different results depending on the definition.
 
 ## Interpret KPIs Together
 
-Individual metrics rarely provide complete insight.
+A single KPI rarely explains business health.
 
-Instead of analysing each KPI independently, consider how they relate.
+Look for relationships among:
 
-Example:
+- customers
+- orders
+- revenue
+- order value
+- delivery
+- reviews
 
-- Orders
-- Customers
-- Average Order Value
-- Delivery Time
-- Review Score
+## Metrics Are Starting Points
 
-Viewed together, these metrics provide a broader understanding of marketplace performance.
+A metric should often generate the next question.
 
----
-
-## Metrics Raise Questions
-
-Business metrics often identify opportunities for further investigation rather than immediate conclusions.
-
-Example:
-
+```text
+Metric
+  ↓
 Observation
-
-> Approximately 1.03 delivered orders per customer.
-
+  ↓
 Question
-
-> How frequently do customers return?
-
-Not Yet a Conclusion
-
-> Customer retention is poor.
-
-Metrics should guide investigation rather than prematurely answer business questions.
-
----
-
-## Let Business Questions Guide Analysis
-
-Exploratory analysis should not become a checklist of unrelated SQL queries.
-
-Instead:
-
-```
-Business Health Report
-
-↓
-
-Business Question
-
-↓
-
-Focused Analysis
-
-↓
-
-Business Insight
-
-↓
-
+  ↓
+Investigation
+  ↓
+Insight
+  ↓
 Recommendation
 ```
 
-A clear analytical objective produces more meaningful results than randomly exploring available tables.
+Do not jump directly from metric to recommendation.
 
 ---
 
@@ -902,204 +492,105 @@ A clear analytical objective produces more meaningful results than randomly expl
 
 ## Purpose
 
-Technical skills help answer questions.
-
-Analytical thinking helps ask the right questions.
-
-Throughout this project, the biggest improvements came from changing how problems were approached rather than learning additional SQL syntax.
-
----
+Develop the habit of thinking like an analyst rather than only writing SQL.
 
 ## Key Principle
 
-> SQL is a tool. Thinking is the real skill.
-
----
+> SQL is a tool. Analytical thinking is the skill.
 
 ## Think Business Before SQL
 
-Every SQL query should begin with a business question.
+Before writing a query, ask:
 
-Instead of asking:
-
-> How can I write this query?
-
-Ask:
-
-- What decision should this analysis support?
-- What business process am I measuring?
+- What business question am I answering?
+- What decision could this support?
 - What business entity should be counted?
-- Which KPI best answers this question?
+- What metric represents the question?
+- What evidence would change my conclusion?
 
-Business understanding should drive technical implementation.
+## Define the Question First
 
----
+A useful workflow:
 
-## Define the Question Before Looking at the Data
-
-Looking at the data first often leads to random exploration.
-
-A better workflow is:
-
-```
+```text
 Business Question
-
-↓
-
+      ↓
 Business Metric
-
-↓
-
+      ↓
 Required Data
-
-↓
-
+      ↓
 SQL Query
-
-↓
-
+      ↓
 Interpretation
 ```
 
-The objective is not to write more SQL—it is to answer meaningful business questions.
-
----
-
-## Profiling Before Analysis
-
-Reliable insights depend on reliable data.
-
-Profiling should confirm:
-
-- completeness
-- consistency
-- relationships
-- business-rule validity
-
-before attempting to explain business behaviour.
-
-Skipping validation increases the risk of producing misleading insights.
-
----
-
-## Separate Observations from Conclusions
-
-One of the most important lessons from this project was recognising the difference between seeing something and explaining it.
+## Separate Observation From Conclusion
 
 Example:
 
-Observation
+**Observation**
 
-> Average delivered orders per customer ≈ 1.03
+> Repeat customers are a small proportion of delivered customers.
 
-This observation raises an important question:
+**Question**
 
-> Why are repeat purchases relatively low?
+> What factors might be associated with customers returning?
 
-It does **not** prove:
+**Not yet justified**
 
-> Customer retention is poor.
+> A particular factor causes poor retention.
 
-A metric identifies where to investigate.
-
-It does not automatically explain why.
-
----
+The first two are supported by analysis; the last requires stronger evidence.
 
 ## Let Metrics Generate Questions
 
-Business metrics are starting points—not final answers.
+Do not turn analysis into a checklist of unrelated SQL queries.
 
-Good analytical thinking follows this sequence:
-
-```
-Metric
-
-↓
-
-Observation
-
-↓
-
-Question
-
-↓
-
-Investigation
-
-↓
-
-Insight
-
-↓
-
-Recommendation
-```
-
-This prevents jumping from numbers directly to conclusions.
-
----
+Each major analysis should have a reason for existing.
 
 ## Validate Assumptions
 
-Unexpected results should trigger curiosity rather than correction.
+When a result looks surprising:
 
-When a value looks unusual:
+1. verify the SQL
+2. verify the business definition
+3. check the data grain
+4. inspect supporting records
+5. consider the business process
 
-- verify the calculation
-- validate the business definition
-- understand the business process
-- investigate supporting evidence
-
-Avoid assuming the data is wrong simply because it is surprising.
-
----
+Do not "fix" a result simply because it is unexpected.
 
 ## Think in Systems
 
-Individual tables rarely tell the whole story.
+Business behaviour usually spans multiple tables.
 
-Business understanding develops by connecting:
+Understand how:
 
-- customers
-- sellers
-- products
-- orders
-- payments
-- reviews
+```text
+Customer
+   ↓
+Order
+   ↓
+Order Items
+   ↓
+Product / Seller
+   ↓
+Delivery / Review
+```
 
-Relationships often reveal more than isolated metrics.
+Connecting these relationships produces better questions than examining tables independently.
 
----
+## Technical Decisions Should Support Analysis
 
-## Every Technical Decision Should Support Analysis
-
-Database design is not an isolated activity.
-
-Choices involving:
-
-- primary keys
-- foreign keys
-- data types
-- constraints
-- documentation
-
-should ultimately make analysis more reliable.
-
----
+Database design, joins, data types and constraints matter because they affect analytical reliability.
 
 ## Continuous Improvement
 
-Understanding evolves throughout the project.
+A good analysis can change your earlier assumptions.
 
-Earlier assumptions may change after:
+That is not failure.
 
-- profiling
-- validation
-- exploratory analysis
-- business interpretation
-
-Good analytical work improves through evidence rather than certainty.
+> Strong analysis becomes more precise as evidence accumulates.
 
 ---
 
@@ -1107,159 +598,493 @@ Good analytical work improves through evidence rather than certainty.
 
 ## Purpose
 
-Documentation preserves knowledge that would otherwise be forgotten.
-
-It explains not only **what was built**, but **why it was built that way**.
-
----
+Documentation should preserve useful thinking without becoming a transcript of the project.
 
 ## Key Principle
 
-> Future you should not have to rediscover today's thinking.
+> Future you should not have to rediscover today's important lessons.
 
----
+## Separate Documentation by Purpose
 
-## Documentation System
+| Document | Main purpose |
+|---|---|
+| README | Explain the project to others |
+| Learning Log | Preserve reusable lessons |
+| Decision Log | Record important project decisions |
+| Roadmap | Track project progress |
+| Database Design | Explain schema and relationships |
+| Business Health Report | Establish business baseline |
+| Final Insights | Present conclusions and recommendations |
 
-Project documentation was intentionally separated by purpose.
+Do not make one document responsible for everything.
 
-| Document | Purpose |
-|----------|---------|
-| README | Project overview and setup |
-| Learning Log | Reusable concepts and analytical thinking |
-| Decision Log | Project-specific architectural decisions |
-| Roadmap | Current status and next milestones |
-| Database Design | Schema, relationships and ER Diagram |
-| Business_health_report | understanding KPI for deeper analysis |
+## Organising SQL
 
-Each document answers a different question instead of trying to do everything.
+A predictable structure makes analysis easier to navigate.
 
----
-
-## Organising SQL Scripts
-
-SQL scripts should follow the lifecycle of the project.
-
-Example structure:
-
-```
-01_database
-
-02_tables
-
-03_import
-
-04_profiling
-
-05_business_health_report
-
-06_exploratory_analysis
-
-07_business_insights
+```text
+sql/
+├── database setup
+├── profiling
+└── analysis
 ```
 
-A predictable structure makes projects easier to navigate, review and reproduce.
+Use meaningful filenames and keep one analytical purpose per major script where practical.
 
----
+## Document the Reasoning
 
-## Documentation Should Capture Thinking
+Useful documentation answers:
 
-Good documentation explains:
+- What did I do?
+- Why did I do it?
+- What did I learn?
+- What should I do differently next time?
 
-- what was done
-- why it was done
-- what was learned
-- how it can be reused
-
-The reasoning behind a decision is often more valuable than the implementation itself.
+Avoid documenting every small action.
 
 ---
 
 # 9. Project Evolution
 
-## Purpose
-
-This section captures how analytical thinking evolved throughout the project.
-
-It is not a project diary or roadmap.
-
-Instead, it documents the major shifts in understanding that changed how the project was approached.
-
----
-
 ## From Learning SQL to Understanding Databases
 
-The project began with learning SQL syntax.
+SQL syntax was only the beginning.
 
-Very quickly, it became clear that SQL alone was not enough.
+Effective analysis required understanding:
 
-Understanding business entities, relationships and database design became equally important.
-
----
+- entities
+- relationships
+- table grain
+- business processes
 
 ## From Tables to Business Processes
 
-Initially, tables appeared as independent datasets.
+Tables are representations of real activities.
 
-Gradually, they became representations of real business processes.
+For example:
 
-Examples include:
+```text
+Customer places order
+        ↓
+Order contains items
+        ↓
+Seller fulfills order
+        ↓
+Customer receives order
+        ↓
+Customer may leave review
+```
 
-- customers placing orders
-- sellers fulfilling purchases
-- products moving through transactions
-- reviews reflecting customer experience
-
-This changed how database design and SQL queries were written.
-
----
+Thinking in processes makes joins and questions easier to understand.
 
 ## From Data Import to Data Trust
 
-Importing data successfully was no longer considered sufficient.
+Importing data is not the same as trusting it.
 
-Confidence in analysis required confidence in the data itself.
-
-Profiling became an essential stage rather than an optional one.
-
----
+Profiling became an essential analytical stage.
 
 ## From Writing Queries to Defining Metrics
 
-A major shift occurred after completing the Business Health Report.
+The important question changed from:
 
-Instead of asking:
+> “What SQL should I write?”
 
-> Which SQL query should I write?
+to:
 
-The question became:
-
-> Which business metric should I define?
-
-This shifted the focus from implementation to business understanding.
-
----
+> “What business metric should I define?”
 
 ## From Exploration to Investigation
 
-Earlier, analysis felt like exploring data to discover something interesting.
+Random exploration can produce interesting numbers without a clear purpose.
 
-Now, analysis begins with a business question.
+A stronger approach is:
 
-Data is explored with a purpose rather than curiosity alone.
+```text
+Business Question
+→ Focused analysis
+→ Evidence
+→ Insight
+→ Recommendation
+```
 
-This results in more focused SQL, clearer insights and stronger business recommendations.
+## The General Lesson
+
+The goal of a data analyst is not to produce the largest number of queries.
+
+It is to produce **reliable evidence that helps answer a meaningful business question.**
 
 ---
 
-## Looking Ahead
+# 10. Customer Retention Analysis
 
-The project is no longer about building a database.
+This section records the **reusable analytical lessons** from the Olist retention investigation. Detailed project decisions and exact findings belong in the Decision Log and Final Insights.
 
-It is now about understanding how businesses operate through data.
+## Define the Customer Before Measuring Retention
 
-Every future analysis should strengthen this ability:
+The entity being counted must match the business question.
 
-- ask better questions
-- define better metrics
-- produce more meaningful business insights
+For this project:
+
+```text
+customer_unique_id
+```
+
+was used as the customer entity rather than the individual `customer_id`.
+
+### General lesson
+
+> A metric is only meaningful when its counted entity is clearly defined.
+
+## Define What Counts as a Purchase
+
+An order record is not always identical to a business purchase event.
+
+For this project:
+
+- delivered orders were included
+- the customer was identified by `customer_unique_id`
+- orders for the same customer with the exact same purchase timestamp were treated as one purchase event
+- `DENSE_RANK()` was used to sequence purchase events
+
+### Why this matters
+
+If multiple database rows represent one business event, counting rows can inflate repeat-purchase metrics.
+
+## Establish the Baseline First
+
+The overall repeat-customer rate established the size of the retention problem before investigating possible explanations.
+
+The important lesson is:
+
+> Baseline first, explanation second.
+
+A low repeat rate does not explain itself.
+
+## Analyse the Customer Journey
+
+Instead of stopping at:
+
+> “How many customers repeat?”
+
+ask:
+
+> “What happens between the first and second purchase?”
+
+This led to analysis of:
+
+- time to second purchase
+- time to third purchase
+- first-purchase characteristics
+
+The first-to-second transition is generally the most important stage when most customers have not yet returned.
+
+## Time-to-Repeat Analysis
+
+Time between purchase events can reveal whether repeat behaviour is:
+
+- immediate
+- short-term
+- medium-term
+- long-term
+
+Use a distribution, not only an average.
+
+Useful statistics include:
+
+- median
+- average
+- mode
+- percentiles
+- minimum/maximum
+- meaningful time buckets
+
+### Important caution
+
+A duration of `0` days does **not** necessarily mean identical timestamps.
+
+It means the elapsed duration is less than 24 hours when whole-day flooring is used.
+
+## Stage Reach vs Final Purchase Count
+
+These answer different questions.
+
+### Stage reach
+
+> How many customers reached purchase number N?
+
+Useful for customer-journey analysis.
+
+### Final purchase count
+
+> How many customers stopped at exactly N purchases?
+
+Useful for describing the distribution of customers' final observed purchase counts.
+
+Do not confuse the two.
+
+## Investigating First-Purchase Characteristics
+
+Potential factors can be tested against repeat behaviour, such as:
+
+- first-purchase category
+- basket size
+- category combinations
+- delivery experience
+- first-purchase order value
+- customer location
+
+The purpose is not to prove that one factor causes retention.
+
+The purpose is to determine whether the data provides a useful signal worth pursuing.
+
+## Negative Findings Matter
+
+If delivery time, first-order value, or location does not meaningfully distinguish repeat customers, that is still useful.
+
+It narrows the problem.
+
+> Good analysis is partly about eliminating weak explanations.
+
+## Do Not Force a Driver
+
+If a factor shows only a small difference or unstable results, do not turn it into the main recommendation.
+
+A strong analyst is willing to conclude:
+
+> “This analysis did not provide strong evidence that this factor explains repeat behaviour.”
+
+That is better than inventing a story from weak evidence.
+
+---
+
+# 11. From Analysis to Recommendations
+
+## Recommendation Framework
+
+A recommendation should connect:
+
+```text
+Finding
+  ↓
+Business implication
+  ↓
+Action / experiment
+  ↓
+Measurement
+```
+
+## Focus on the First-to-Second Purchase Transition
+
+When the largest loss occurs after the first purchase, the strongest strategic focus is often the period immediately following that purchase.
+
+Potential actions should be framed as **tests**, not guaranteed solutions.
+
+Examples of testable directions:
+
+- post-purchase communication
+- personalised follow-up
+- relevant cross-sell suggestions
+- reminders based on likely repurchase timing
+- category-specific re-engagement
+
+The analysis alone does not prove which intervention will work.
+
+## Good Recommendation Language
+
+Prefer:
+
+> “Test X because the analysis indicates Y.”
+
+Avoid:
+
+> “X will increase retention.”
+
+The first is evidence-based and appropriately qualified.
+
+## Measure the Recommendation
+
+A recommendation is incomplete without a success metric.
+
+Possible measures:
+
+- second-purchase rate
+- time to second purchase
+- reactivation rate
+- conversion from post-purchase campaign
+- incremental revenue
+
+Where possible, compare a test group against a control group.
+
+## Observational Analysis vs Experimentation
+
+The current project is observational.
+
+It can identify patterns and associations.
+
+An experiment is needed to estimate the causal effect of an intervention.
+
+---
+
+# 12. Analytical Discipline & Limitations
+
+## Association Is Not Causation
+
+If customers in one category repeat more often, that does not prove the category causes repeat purchasing.
+
+Possible explanations include:
+
+- customer intent
+- product characteristics
+- customer demographics
+- price
+- purchase occasion
+- other unmeasured factors
+
+Use language such as:
+
+- associated with
+- correlated with
+- shows a higher/lower rate
+- suggests
+- may indicate
+
+Avoid unsupported causal language.
+
+## Small Groups Require Caution
+
+A high percentage from a very small customer group may be unstable.
+
+Always consider:
+
+```text
+Rate + Sample Size
+```
+
+not rate alone.
+
+Thresholds can help keep comparisons interpretable.
+
+## Definitions Affect Results
+
+Changing any of these can change the answer:
+
+- customer definition
+- order status
+- purchase-event definition
+- time window
+- missing-value treatment
+- aggregation grain
+
+Therefore:
+
+> Document definitions before comparing metrics.
+
+## Observational Data Has Limits
+
+Historical transactional data can show what happened.
+
+It usually cannot, by itself, establish why something happened or what intervention will definitely work.
+
+## Scope of the Current Analysis
+
+The retention investigation focused on the period around the first purchase and the transition to subsequent purchases.
+
+The analysis should not be presented as a full causal retention model or experimental study.
+
+## Standard for a Strong Final Insight
+
+A strong insight should be:
+
+### 1. Supported by the data
+
+The calculation is correct and validated.
+
+### 2. Relevant to the business question
+
+It helps answer the retention problem.
+
+### 3. Appropriately qualified
+
+The wording matches the strength of the evidence.
+
+## Current Analytical Workflow
+
+Use this as a reusable template for future projects:
+
+```text
+1. Understand the business
+        ↓
+2. Define the business question
+        ↓
+3. Define entities and metrics
+        ↓
+4. Understand the data grain
+        ↓
+5. Profile and validate the data
+        ↓
+6. Establish a baseline
+        ↓
+7. Identify an important gap/pattern
+        ↓
+8. Investigate likely explanations
+        ↓
+9. Validate findings
+        ↓
+10. Separate strong findings from weak ones
+        ↓
+11. Translate findings into recommendations
+        ↓
+12. Define how recommendations should be measured
+```
+
+---
+
+# 13. Quick Reference
+
+## Before Writing SQL
+
+Ask:
+
+- What business question am I answering?
+- What entity am I counting?
+- What does one row represent?
+- What is the correct grain?
+- What is the metric definition?
+- What should be included/excluded?
+
+## Before Trusting a Result
+
+Check:
+
+- row counts
+- joins
+- duplicates
+- NULLs
+- aggregation grain
+- denominator
+- unexpected values
+- business logic
+
+## Before Calling Something an Insight
+
+Ask:
+
+- Is the observation correct?
+- Does it answer the business question?
+- Is the sample large enough?
+- Could another explanation exist?
+- Am I confusing association with causation?
+- Does this actually change what the business should investigate or do?
+
+## Before Making a Recommendation
+
+Ask:
+
+- What finding supports it?
+- Why is the action relevant?
+- Is it a proven solution or a testable hypothesis?
+- How would success be measured?
+
+## The Core Lesson
+
+> **Good data analysis is not about finding the most interesting number. It is about turning a business question into reliable evidence and knowing how far that evidence allows you to go.**

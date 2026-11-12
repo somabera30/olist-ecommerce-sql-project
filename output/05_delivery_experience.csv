@@ -1,0 +1,3 @@
+"customer_type","mode_days_to_deliver","average_days_to_deliver","p25_days_to_deliver","median_days_to_deliver","p75_days_to_deliver","lowest_days_to_deliver","highest_days_to_deliver"
+"One-time","7.1","12.58",6.8,10.2,15.7,"0.5","209.6"
+"Repeat","7.9","12.42",6.9,10.4,15.6,"1.0","88.2"
