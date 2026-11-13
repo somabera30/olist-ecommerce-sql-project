@@ -44,12 +44,12 @@ The retention analysis focuses on delivered customers and distinct purchasing oc
 | Finding | Result | SQL Reference |
 |---|---:|---|
 | Delivered customers | 93,358 | [Query 1](sql/3.Analysis/06_customer_retention_analysis.sql#L34-L80) |
-| Customers with more than one purchasing occasion | 2,565 | [Query 2](sql/3.Analysis/06_customer_retention_analysis.sql#L34-L80) |
-| Repeat customer rate | **~2.75%** | [Query 2](sql/3.Analysis/06_customer_retention_analysis.sql#L34-L80) |
-| Customers reaching a third purchasing occasion | 202 | [Query 3](sql/3.Analysis/06_customer_retention_analysis.sql#L267-L321) |
-| Second-to-third purchase transition | 7.88% | [Query 3](sql/3.Analysis/06_customer_retention_analysis.sql#L267-L321) |
-| Median time to second purchase, among returning customers | **41 days** | [Query 4](sql/3.Analysis/06_customer_retention_analysis.sql#L87-L136) |
-| Average time to second purchase, among returning customers | 88.86 days | [Query 4](sql/3.Analysis/06_customer_retention_analysis.sql#L87-L136) |
+| Customers with more than one purchasing occasion | 2,565 | [Query 1](sql/3.Analysis/06_customer_retention_analysis.sql#L34-L80) |
+| Repeat customer rate | **~2.75%** | [Query 1](sql/3.Analysis/06_customer_retention_analysis.sql#L34-L80) |
+| Customers reaching a third purchasing occasion | 202 | [Query 2](sql/3.Analysis/06_customer_retention_analysis.sql#L267-L321) |
+| Second-to-third purchase transition | 7.88% | [Query 2](sql/3.Analysis/06_customer_retention_analysis.sql#L267-L321) |
+| Median time to second purchase, among returning customers | **41 days** | [Query 3](sql/3.Analysis/06_customer_retention_analysis.sql#L87-L136) |
+| Average time to second purchase, among returning customers | 88.86 days | [Query 3](sql/3.Analysis/06_customer_retention_analysis.sql#L87-L136) |
 
 
 **Note:** This analysis focuses on delivered customers and distinct purchasing occasions. Multiple order IDs with the same purchase timestamp are treated as one purchasing occasion.
